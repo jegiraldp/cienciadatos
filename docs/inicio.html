@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Datos → Información → Conocimiento</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* ─── VARIABLES ─── */
+  :root {
+    --clr-bg:        #0f1117;
+    --clr-surface:   #181b24;
+    --clr-border:    #2a2e3a;
+    --clr-text:      #c8cdd8;
+    --clr-text-dim:  #6b7280;
+    --clr-white:     #eef0f5;
+
+    --clr-dato:      #38bdf8;
+    --clr-dato-dim:  rgba(56,189,248,.12);
+    --clr-info:      #a78bfa;
+    --clr-info-dim:  rgba(167,139,250,.12);
+    --clr-conoc:     #34d399;
+    --clr-conoc-dim: rgba(52,211,153,.12);
+
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body:    'Manrope', system-ui, sans-serif;
+    --font-mono:    'IBM Plex Mono', monospace;
+
+    --radius: 14px;
+    --transition: .35s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ─── RESET & BASE ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--clr-bg);
+    color: var(--clr-text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── AMBIENT BG ─── */
+  .bg-orbs {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  }
+  .bg-orbs::before, .bg-orbs::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: .18;
+  }
+  .bg-orbs::before {
+    width: 500px; height: 500px;
+    background: var(--clr-dato);
+    top: -100px; left: -100px;
+  }
+  .bg-orbs::after {
+    width: 450px; height: 450px;
+    background: var(--clr-conoc);
+    bottom: -80px; right: -80px;
+  }
+
+  /* ─── LAYOUT ─── */
+  .wrapper { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 60px 24px 80px; }
+
+  /* ─── HEADER ─── */
+  .header { text-align: center; margin-bottom: 56px; }
+  .header .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--clr-text-dim);
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: var(--clr-white);
+    line-height: 1.2;
+  }
+  .header h1 .arrow { color: var(--clr-text-dim); margin: 0 8px; }
+  .header p {
+    margin-top: 14px;
+    color: var(--clr-text-dim);
+    max-width: 520px;
+    margin-left: auto; margin-right: auto;
+  }
+
+  /* ─── FLOW BAR ─── */
+  .flow-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 52px;
+  }
+  .flow-step {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: 30px;
+    padding: 10px 20px 10px 14px;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+  }
+  .flow-step:hover { border-color: var(--clr-text-dim); }
+  .flow-step.active { border-color: currentColor; }
+
+  .flow-step .dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+  .flow-step span { font-size: 13px; font-weight: 500; letter-spacing: .3px; }
+
+  .flow-step[data-section="datos"]   { color: var(--clr-dato); }
+  .flow-step[data-section="info"]    { color: var(--clr-info); }
+  .flow-step[data-section="conoc"]   { color: var(--clr-conoc); }
+  .flow-step[data-section="datos"] .dot   { background: var(--clr-dato); }
+  .flow-step[data-section="info"]  .dot   { background: var(--clr-info); }
+  .flow-step[data-section="conoc"] .dot   { background: var(--clr-conoc); }
+
+  .flow-arrow {
+    font-size: 18px;
+    color: var(--clr-border);
+    margin: 0 6px;
+    user-select: none;
+  }
+
+  /* ─── SECTION CARD ─── */
+  .section-card {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    padding: 36px 34px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color var(--transition);
+  }
+  .section-card:hover { border-color: var(--clr-border); }
+
+  /* colored top-bar accent */
+  .section-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .section-card[data-theme="datos"]::before { background: var(--clr-dato); }
+  .section-card[data-theme="info"]::before  { background: var(--clr-info); }
+  .section-card[data-theme="conoc"]::before { background: var(--clr-conoc); }
+
+  /* card header row */
+  .card-head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+  .card-icon {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .section-card[data-theme="datos"] .card-icon { background: var(--clr-dato-dim); color: var(--clr-dato); }
+  .section-card[data-theme="info"]  .card-icon { background: var(--clr-info-dim); color: var(--clr-info); }
+  .section-card[data-theme="conoc"] .card-icon { background: var(--clr-conoc-dim); color: var(--clr-conoc); }
+
+  .card-head h2 {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 400;
+    color: var(--clr-white);
+  }
+  .card-head .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-top: 4px;
+  }
+  .section-card[data-theme="datos"] .badge { color: var(--clr-dato); background: var(--clr-dato-dim); }
+  .section-card[data-theme="info"]  .badge { color: var(--clr-info); background: var(--clr-info-dim); }
+  .section-card[data-theme="conoc"] .badge { color: var(--clr-conoc); background: var(--clr-conoc-dim); }
+
+  /* definition box */
+  .definition {
+    background: rgba(255,255,255,.03);
+    border-left: 3px solid;
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin-bottom: 26px;
+  }
+  .section-card[data-theme="datos"] .definition { border-color: var(--clr-dato); }
+  .section-card[data-theme="info"]  .definition { border-color: var(--clr-info); }
+  .section-card[data-theme="conoc"] .definition { border-color: var(--clr-conoc); }
+
+  .definition .def-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .section-card[data-theme="datos"] .def-label { color: var(--clr-dato); }
+  .section-card[data-theme="info"]  .def-label { color: var(--clr-info); }
+  .section-card[data-theme="conoc"] .def-label { color: var(--clr-conoc); }
+
+  .definition p { color: var(--clr-text); font-size: 14.5px; }
+
+  /* ─── EXAMPLES TOGGLE ─── */
+  .examples-toggle {
+    width: 100%;
+    background: none;
+    border: 1px solid var(--clr-border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--clr-text);
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition);
+    text-align: left;
+  }
+  .examples-toggle:hover { background: rgba(255,255,255,.04); border-color: var(--clr-text-dim); }
+  .examples-toggle .chevron {
+    transition: transform var(--transition);
+    color: var(--clr-text-dim);
+  }
+  .examples-toggle.open .chevron { transform: rotate(180deg); }
+
+  /* ─── EXAMPLES PANEL ─── */
+  .examples-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .45s cubic-bezier(.4,0,.2,1);
+  }
+  .examples-panel.open { max-height: 600px; }
+
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 16px 0 4px;
+  }
+  .example-chip {
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--clr-border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: var(--transition);
+  }
+  .example-chip:hover { background: rgba(255,255,255,.07); }
+  .example-chip .chip-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .section-card[data-theme="datos"] .chip-label { color: var(--clr-dato); }
+  .section-card[data-theme="info"]  .chip-label { color: var(--clr-info); }
+  .section-card[data-theme="conoc"] .chip-label { color: var(--clr-conoc); }
+
+  .example-chip p { font-size: 13px; color: var(--clr-text); }
+
+  /* ─── TRANSFORMATION DIAGRAM ─── */
+  .transform-box {
+    margin-top: 48px;
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    padding: 32px 30px;
+  }
+  .transform-box h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--clr-white);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .transform-box > p {
+    color: var(--clr-text-dim);
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dia-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 130px;
+  }
+  .dia-icon {
+    width: 60px; height: 60px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+  }
+  .dia-node:nth-child(1) .dia-icon { background: var(--clr-dato-dim);  color: var(--clr-dato);  border: 1px solid rgba(56,189,248,.25); }
+  .dia-node:nth-child(3) .dia-icon { background: var(--clr-info-dim);  color: var(--clr-info);  border: 1px solid rgba(167,139,250,.25); }
+  .dia-node:nth-child(5) .dia-icon { background: var(--clr-conoc-dim); color: var(--clr-conoc); border: 1px solid rgba(52,211,153,.25); }
+
+  .dia-node span {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--clr-text);
+    letter-spacing: .3px;
+  }
+
+  .dia-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 80px;
+  }
+  .dia-arrow .arr-line {
+    width: 50px; height: 2px;
+    background: linear-gradient(90deg, var(--clr-border), var(--clr-text-dim));
+    position: relative;
+  }
+  .dia-arrow .arr-line::after {
+    content: '›';
+    position: absolute;
+    right: -4px; top: -8px;
+    color: var(--clr-text-dim);
+    font-size: 18px;
+  }
+  .dia-arrow .arr-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--clr-text-dim);
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* ─── QUIZ SECTION ─── */
+  .quiz-box {
+    margin-top: 40px;
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    padding: 32px 30px;
+  }
+  .quiz-box h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--clr-white);
+    margin-bottom: 6px;
+  }
+  .quiz-box > p { color: var(--clr-text-dim); font-size: 13px; margin-bottom: 24px; }
+
+  .quiz-q {
+    background: rgba(255,255,255,.03);
+    border: 1px solid var(--clr-border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .quiz-q .q-text { font-size: 14px; color: var(--clr-white); margin-bottom: 12px; font-weight: 500; }
+  .quiz-q .options { display: flex; flex-direction: column; gap: 7px; }
+
+  .option-btn {
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--clr-border);
+    border-radius: 8px;
+    padding: 9px 14px;
+    color: var(--clr-text);
+    font-family: var(--font-body);
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+    transition: var(--transition);
+  }
+  .option-btn:hover { background: rgba(255,255,255,.09); border-color: var(--clr-text-dim); }
+  .option-btn.correct {
+    background: rgba(52,211,153,.12);
+    border-color: var(--clr-conoc);
+    color: var(--clr-conoc);
+  }
+  .option-btn.wrong {
+    background: rgba(248,113,113,.12);
+    border-color: #f87171;
+    color: #f87171;
+  }
+  .option-btn:disabled { cursor: default; }
+
+  .feedback {
+    font-size: 12px;
+    margin-top: 8px;
+    min-height: 18px;
+    font-style: italic;
+  }
+  .feedback.correct { color: var(--clr-conoc); }
+  .feedback.wrong   { color: #f87171; }
+
+  /* ─── FOOTER ─── */
+  .footer { text-align: center; margin-top: 60px; color: var(--clr-text-dim); font-size: 12px; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .section-card { animation: fadeUp .5s ease both; }
+  .section-card:nth-child(1) { animation-delay: .05s; }
+  .section-card:nth-child(2) { animation-delay: .15s; }
+  .section-card:nth-child(3) { animation-delay: .25s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .wrapper { padding: 40px 16px 60px; }
+    .section-card { padding: 24px 20px; }
+    .flow-bar { flex-wrap: wrap; justify-content: center; }
+    .flow-arrow { display: none; }
+    .examples-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Ambient background orbs -->
+<div class="bg-orbs"></div>
+
+<div class="wrapper">
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="tag">Introducción a la Ingeniería en Ciencia de Datos</div>
+    <h1>Datos <span class="arrow">→</span> Información <span class="arrow">→</span> Conocimiento</h1>
+    <p>Explora las tres piedras fundamentales del manejo de datos: qué son, cómo se relacionan y cómo se transforman entre sí.</p>
+  </header>
+
+  <!-- ── FLOW NAV ── -->
+  <nav class="flow-bar">
+    <a class="flow-step active" data-section="datos" href="#datos">
+      <span class="dot"></span><span>Datos</span>
+    </a>
+    <span class="flow-arrow">›</span>
+    <a class="flow-step" data-section="info" href="#info">
+      <span class="dot"></span><span>Información</span>
+    </a>
+    <span class="flow-arrow">›</span>
+    <a class="flow-step" data-section="conoc" href="#conoc">
+      <span class="dot"></span><span>Conocimiento</span>
+    </a>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       SECCIÓN 1 — DATOS
+       ══════════════════════════════════════════ -->
+  <section id="datos" class="section-card" data-theme="datos">
+    <div class="card-head">
+      <div class="card-icon">📦</div>
+      <div>
+        <h2>Datos</h2>
+        <span class="badge">Nivel 1 · Materia prima</span>
+      </div>
+    </div>
+
+    <div class="definition">
+      <div class="def-label">Definición</div>
+      <p>Los <strong>datos</strong> son hechos o valores crudos, sin contexto ni interpretación. Son las unidades básicas de representación: números, texto, fechas, imágenes o cualquier otra forma de registro que, por sí solos, no comunican significado.</p>
+    </div>
+
+    <button class="examples-toggle" onclick="toggleExamples(this)">
+      <span>Ver ejemplos de datos</span>
+      <span class="chevron">▼</span>
+    </button>
+    <div class="examples-panel">
+      <div class="examples-grid">
+        <div class="example-chip">
+          <div class="chip-label">Numérico</div>
+          <p>El valor <code style="color:var(--clr-dato)">38.5</code> registrado en un sensor de temperatura.</p>
+        </div>
+        <div class="example-chip">
+          <div class="chip-label">Texto</div>
+          <p>La cadena <code style="color:var(--clr-dato)">"García"</code> almacenada en un campo de nombre.</p>
+        </div>
+        <div class="example-chip">
+          <div class="chip-label">Fecha</div>
+          <p>El registro <code style="color:var(--clr-dato)">2024-03-15</code> sin indicar qué evento representa.</p>
+        </div>
+        <div class="example-chip">
+          <div class="chip-label">Booleano</div>
+          <p>El valor <code style="color:var(--clr-dato)">TRUE</code> en una columna sin nombre descriptivo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECCIÓN 2 — INFORMACIÓN
+       ══════════════════════════════════════════ -->
+  <section id="info" class="section-card" data-theme="info">
+    <div class="card-head">
+      <div class="card-icon">🔍</div>
+      <div>
+        <h2>Información</h2>
+        <span class="badge">Nivel 2 · Datos en contexto</span>
+      </div>
+    </div>
+
+    <div class="definition">
+      <div class="def-label">Definición</div>
+      <p>La <strong>información</strong> surge cuando los datos se organizan, clasifican o relacionan dentro de un contexto. Responde preguntas específicas como ¿qué?, ¿cuándo? o ¿cuánto?, y permite dar sentido a los datos crudos mediante estructura y significado.</p>
+    </div>
+
+    <button class="examples-toggle" onclick="toggleExamples(this)">
+      <span>Ver ejemplos de información</span>
+      <span class="chevron">▼</span>
+    </button>
+    <div class="examples-panel">
+      <div class="examples-grid">
+        <div class="example-chip">
+          <div class="chip-label">Tabla estructurada</div>
+          <p>Una tabla que muestra que el <strong>38.5 °C</strong> fue la temperatura máxima en Medellín el 15 de marzo.</p>
+        </div>
+        <div class="example-chip">
+          <div class="chip-label">Gráfico</div>
+          <p>Un gráfico de líneas que presenta la tendencia de ventas mensual durante un año fiscal.</p>
+        </div>
+        <div class="example-chip">
+          <div class="chip-label">Reporte</div>
+          <p>Un resumen que indica que el 72 % de los estudiantes aprobaron el examen final.</p>
+        </div>
+        <div class="example-chip">
+          <div class="chip-label">Clasificación</div>
+          <p>Agrupar correos electrónicos en categorías: <em>spam</em>, <em>importante</em> y <em>social</em>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECCIÓN 3 — CONOCIMIENTO
+       ══════════════════════════════════════════ -->
+  <section id="conoc" class="section-card" data-theme="conoc">
+    <div class="card-head">
+      <div class="card-icon">💡</div>
+      <div>
+        <h2>Conocimiento</h2>
+        <span class="badge">Nivel 3 · Decisiones y patrones</span>
+      </div>
+    </div>
+
+    <div class="definition">
+      <div class="def-label">Definición</div>
+      <p>El <strong>conocimiento</strong> se obtiene al analizar, interpretar y aplicar la información para descubrir patrones, reglas o principios. Permite tomar decisiones, hacer predicciones y extraer valor estratégico. Es el resultado de un proceso de aprendizaje sobre los datos.</p>
+    </div>
+
+    <button class="examples-toggle" onclick="toggleExamples(this)">
+      <span>Ver ejemplos de conocimiento</span>
+      <span class="chevron">▼</span>
+    </button>
+    <div class="examples-panel">
+      <div class="examples-grid">
+        <div class="example-chip">
+          <div class="chip-label">Patrón descubierto</div>
+          <p>Detectar que los clientes tienden a comprar más los viernes por la tarde.</p>
+        </div>
+        <div class="example-chip">
+          <div class="chip-label">Predicción</div>
+          <p>Un modelo que estima la probabilidad de lluvia en las próximas 48 horas.</p>
+        </div>
+        <div class="example-chip">
+          <div class="chip-label">Decisión estratégica</div>
+          <p>Decidir abrir una nueva sucursal en una zona basándose en datos de demanda.</p>
+        </div>
+        <div class="example-chip">
+          <div class="chip-label">Regla de negocio</div>
+          <p>Si un usuario no inicia sesión en 30 días, enviar un correo de reactivación.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       DIAGRAMA DE TRANSFORMACIÓN
+       ══════════════════════════════════════════ -->
+  <div class="transform-box">
+    <h3>Flujo de Transformación</h3>
+    <p>Así pasan los datos crudos a generar valor real</p>
+    <div class="diagram">
+      <div class="dia-node">
+        <div class="dia-icon">📦</div>
+        <span>Datos</span>
+      </div>
+      <div class="dia-arrow">
+        <div class="arr-line"></div>
+        <div class="arr-label">Organizar<br>Contextualizar</div>
+      </div>
+      <div class="dia-node">
+        <div class="dia-icon">🔍</div>
+        <span>Información</span>
+      </div>
+      <div class="dia-arrow">
+        <div class="arr-line"></div>
+        <div class="arr-label">Analizar<br>Interpretar</div>
+      </div>
+      <div class="dia-node">
+        <div class="dia-icon">💡</div>
+        <span>Conocimiento</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       QUIZ INTERACTIVO
+       ══════════════════════════════════════════ -->
+  <div class="quiz-box">
+    <h3>Prueba tu comprensión</h3>
+    <p>Selecciona la respuesta correcta en cada pregunta</p>
+
+    <!-- Q1 -->
+    <div class="quiz-q" id="q1">
+      <div class="q-text">1. El valor <code style="color:var(--clr-dato)">1024</code> almacenado en un archivo sin contexto es considerado…</div>
+      <div class="options">
+        <button class="option-btn" onclick="checkAnswer(this, 'q1', true)">Un dato crudo</button>
+        <button class="option-btn" onclick="checkAnswer(this, 'q1', false)">Información procesada</button>
+        <button class="option-btn" onclick="checkAnswer(this, 'q1', false)">Conocimiento estratégico</button>
+      </div>
+      <div class="feedback" id="fb-q1"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-q" id="q2">
+      <div class="q-text">2. Un gráfico que muestra las ventas mensuales de una empresa es un ejemplo de…</div>
+      <div class="options">
+        <button class="option-btn" onclick="checkAnswer(this, 'q2', false)">Datos</button>
+        <button class="option-btn" onclick="checkAnswer(this, 'q2', true)">Información</button>
+        <button class="option-btn" onclick="checkAnswer(this, 'q2', false)">Conocimiento</button>
+      </div>
+      <div class="feedback" id="fb-q2"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-q" id="q3">
+      <div class="q-text">3. Descubrir que los clientes compran más los viernes es un ejemplo de…</div>
+      <div class="options">
+        <button class="option-btn" onclick="checkAnswer(this, 'q3', false)">Datos</button>
+        <button class="option-btn" onclick="checkAnswer(this, 'q3', false)">Información</button>
+        <button class="option-btn" onclick="checkAnswer(this, 'q3', true)">Conocimiento</button>
+      </div>
+      <div class="feedback" id="fb-q3"></div>
+    </div>
+  </div>
+
+  <footer class="footer">Curso · Introducción a la Ingeniería en Ciencia de Datos</footer>
+</div>
+
+<!-- ── SCRIPTS ── -->
+<script>
+  // ─── Toggle de ejemplos ───
+  function toggleExamples(btn) {
+    const panel = btn.nextElementSibling;
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    btn.classList.toggle('open', !isOpen);
+    btn.querySelector('span:first-child').textContent = isOpen
+      ? btn.closest('.section-card').dataset.theme === 'datos'   ? 'Ver ejemplos de datos'
+      : btn.closest('.section-card').dataset.theme === 'info'    ? 'Ver ejemplos de información'
+      : 'Ver ejemplos de conocimiento'
+      : 'Ocultar ejemplos';
+  }
+
+  // ─── Nav activa según scroll ───
+  const sections = document.querySelectorAll('.section-card[id]');
+  const navLinks  = document.querySelectorAll('.flow-step');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY + 180 >= s.offsetTop) current = s.id;
+    });
+    navLinks.forEach(l => {
+      l.classList.toggle('active', l.dataset.section === current);
+    });
+  });
+
+  // ─── Quiz ───
+  function checkAnswer(btn, qId, isCorrect) {
+    const container = document.getElementById(qId);
+    const allBtns   = container.querySelectorAll('.option-btn');
+    const feedback  = document.getElementById('fb-' + qId);
+
+    // Deshabilitar todos
+    allBtns.forEach(b => b.disabled = true);
+
+    if (isCorrect) {
+      btn.classList.add('correct');
+      feedback.textContent = '✓ ¡Correcto!';
+      feedback.className   = 'feedback correct';
+    } else {
+      btn.classList.add('wrong');
+      feedback.textContent = '✕ Incorrecto. Revisa las definiciones y vuelve a intentarlo.';
+      feedback.className   = 'feedback wrong';
+      // Mostrar la respuesta correcta
+      allBtns.forEach(b => {
+        if (b.onclick.toString().includes('true')) b.classList.add('correct');
+      });
+    }
+  }
+</script>
+</body>
+</html>
