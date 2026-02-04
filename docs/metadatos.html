@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Notas de Clase - XML y JSON</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f7f9fc;
+      color: #222;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    nav {
+      width: 260px;
+      background-color: #ffffff;
+      border-right: 1px solid #dcdcdc;
+      padding: 20px;
+    }
+    nav h2 {
+      font-size: 18px;
+      margin-top: 0;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+    nav ul li {
+      margin-bottom: 10px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #1a4fb3;
+      font-weight: 600;
+    }
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+    main {
+      flex: 1;
+      padding: 30px 40px;
+    }
+    section {
+      margin-bottom: 50px;
+    }
+    h1, h2, h3 {
+      color: #1a4fb3;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    p {
+      line-height: 1.6;
+      text-align: justify;
+    }
+    ul {
+      line-height: 1.6;
+    }
+    pre {
+      background-color: #eef2f7;
+      padding: 15px;
+      overflow-x: auto;
+      border-left: 4px solid #1a4fb3;
+    }
+    code {
+      font-family: Consolas, monospace;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <h2>Contenido</h2>
+      <ul>
+        <li><a href="#metadata">Metadatos</a></li>
+        <li><a href="#xml">XML</a></li>
+        <li><a href="#json">JSON</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1>Notas de Clase: XML y JSON</h1>
+
+      <section id="metadata">
+        <h2>¿Qué es un metadato?</h2>
+        <p>
+          Un <strong>metadato</strong> es información que describe otros datos. Su función principal es facilitar la comprensión,
+          organización, búsqueda y gestión de la información. Los metadatos no suelen contener el dato principal en sí, sino
+          características asociadas a él, como su origen, formato, fecha de creación, autor o estructura.
+        </p>
+        <p>
+          En el contexto de tecnologías como XML y JSON, los metadatos pueden describir la estructura de los datos, su semántica
+          o las reglas que deben cumplir, permitiendo la interoperabilidad entre sistemas.
+        </p>
+      </section>
+
+      <section id="xml">
+        <h2>XML (eXtensible Markup Language)</h2>
+
+        <h3>Definición</h3>
+        <p>
+          XML es un lenguaje de marcado extensible diseñado para almacenar y transportar datos. Se basa en una estructura
+          jerárquica de etiquetas definidas por el usuario, lo que permite describir la información de manera clara y estructurada.
+        </p>
+
+        <h3>Aplicaciones</h3>
+        <ul>
+          <li>Intercambio de información entre sistemas heterogéneos.</li>
+          <li>Configuración de aplicaciones y servicios.</li>
+          <li>Representación de documentos estructurados.</li>
+          <li>Servicios web (SOAP).</li>
+        </ul>
+
+        <h3>Herramientas y editores</h3>
+        <ul>
+          <li>Visual Studio Code</li>
+          <li>Oxygen XML Editor</li>
+          <li>Notepad++</li>
+          <li>XMLSpy</li>
+        </ul>
+
+        <h3>Ejemplos de código XML</h3>
+        <pre><code>&lt;persona&gt;
+  &lt;nombre&gt;Ana&lt;/nombre&gt;
+  &lt;edad&gt;25&lt;/edad&gt;
+&lt;/persona&gt;</code></pre>
+
+        <pre><code>&lt;libro&gt;
+  &lt;titulo&gt;Programación&lt;/titulo&gt;
+  &lt;autor&gt;Juan Pérez&lt;/autor&gt;
+&lt;/libro&gt;</code></pre>
+
+        <pre><code>&lt;curso&gt;
+  &lt;nombre&gt;Bases de Datos&lt;/nombre&gt;
+  &lt;creditos&gt;3&lt;/creditos&gt;
+&lt;/curso&gt;</code></pre>
+
+        <pre><code>&lt;producto id="101"&gt;
+  &lt;nombre&gt;Laptop&lt;/nombre&gt;
+  &lt;precio&gt;2500&lt;/precio&gt;
+&lt;/producto&gt;</code></pre>
+
+        <pre><code>&lt;universidad&gt;
+  &lt;facultad&gt;Ingeniería&lt;/facultad&gt;
+&lt;/universidad&gt;</code></pre>
+
+        <h3>Preguntas de selección múltiple (única respuesta)</h3>
+        <div class="question">1. XML se caracteriza principalmente por:
+          <ul>
+            <li>a) Usar solo datos numéricos</li>
+            <li>b) Ser un lenguaje de marcado extensible</li>
+            <li>c) No permitir jerarquías</li>
+            <li>d) Reemplazar a HTML</li>
+          </ul>
+        </div>
+        <div class="question">2. ¿Cuál de los siguientes es un uso común de XML?
+          <ul>
+            <li>a) Diseño gráfico</li>
+            <li>b) Almacenamiento de imágenes</li>
+            <li>c) Intercambio de datos</li>
+            <li>d) Compresión de archivos</li>
+          </ul>
+        </div>
+        <div class="question">3. XML permite definir:
+          <ul>
+            <li>a) Solo etiquetas predefinidas</li>
+            <li>b) Etiquetas personalizadas</li>
+            <li>c) Únicamente tablas</li>
+            <li>d) Solo datos binarios</li>
+          </ul>
+        </div>
+
+        <h3>Preguntas abiertas para discusión</h3>
+        <ul>
+          <li>¿Cuáles son las ventajas y desventajas de XML frente a otros formatos de intercambio de datos?</li>
+          <li>¿En qué escenarios actuales sigue siendo recomendable el uso de XML?</li>
+        </ul>
+      </section>
+
+      <section id="comparacion">
+        <h2>Comparación entre XML y JSON</h2>
+        <p>
+          XML y JSON son formatos ampliamente utilizados para el intercambio de datos, pero presentan diferencias
+          importantes en cuanto a estructura, complejidad y casos de uso.
+        </p>
+        <ul>
+          <li><strong>Estructura:</strong> XML utiliza etiquetas jerárquicas; JSON usa pares clave-valor.</li>
+          <li><strong>Legibilidad:</strong> JSON suele ser más compacto y fácil de leer.</li>
+          <li><strong>Validación:</strong> XML cuenta con DTD y XSD; JSON utiliza JSON Schema.</li>
+          <li><strong>Uso común:</strong> XML es frecuente en sistemas legados; JSON domina en APIs modernas.</li>
+        </ul>
+        <table border="1" cellpadding="8">
+          <tr><th>Característica</th><th>XML</th><th>JSON</th></tr>
+          <tr><td>Formato</td><td>Etiquetas</td><td>Clave-valor</td></tr>
+          <tr><td>Extensibilidad</td><td>Alta</td><td>Media</td></tr>
+          <tr><td>Tamaño</td><td>Mayor</td><td>Menor</td></tr>
+          <tr><td>Uso actual</td><td>Empresarial / Documental</td><td>Web / APIs</td></tr>
+        </table>
+
+        <h3>Errores comunes en XML</h3>
+        <pre><code>&lt;persona&gt;
+  &lt;nombre&gt;Ana&lt;/nombre&gt;
+  &lt;edad&gt;25&lt;/edad&gt;
+&lt;/person&gt;  &lt;!-- Etiqueta mal cerrada --&gt;</code></pre>
+        <pre><code>&lt;persona&gt;
+  &lt;nombre&gt;Ana&lt;nombre&gt;  &lt;!-- Falta barra de cierre --&gt;
+&lt;/persona&gt;</code></pre>
+
+        
+
+        <h3>Ejercicios prácticos (XML)</h3>
+        <p><strong>Ejercicio 1:</strong> Construya un documento XML que represente un sistema académico universitario. El archivo debe incluir información de la universidad, facultades, programas, cursos y estudiantes. El documento debe tener una estructura jerárquica clara y contener al menos 20 líneas de código XML bien formadas.</p>
+        <pre><code>&lt;universidad&gt;
+  &lt;nombre&gt;Universidad Nacional&lt;/nombre&gt;
+  &lt;facultad&gt;
+    &lt;nombre&gt;Ingeniería&lt;/nombre&gt;
+    &lt;programa&gt;
+      &lt;nombre&gt;Ingeniería de Sistemas&lt;/nombre&gt;
+      &lt;curso&gt;
+        &lt;codigo&gt;IS101&lt;/codigo&gt;
+        &lt;nombre&gt;Programación&lt;/nombre&gt;
+        &lt;estudiante&gt;
+          &lt;id&gt;1001&lt;/id&gt;
+          &lt;nombre&gt;Ana López&lt;/nombre&gt;
+        &lt;/estudiante&gt;
+      &lt;/curso&gt;
+    &lt;/programa&gt;
+  &lt;/facultad&gt;
+&lt;/universidad&gt;</code></pre>
+
+        <p><strong>Ejercicio 2:</strong> Analice el XML anterior e identifique posibles mejoras en la organización de etiquetas, reutilización de nodos y claridad semántica.</p>
+
+          <h3>Ejercicios incompletos para el estudiante (XML)</h3>
+        <p>Complete el siguiente documento XML agregando la información faltante para facultad, programa, cursos y estudiantes. El archivo final debe quedar bien formado y coherente.</p>
+        <pre><code>&lt;universidad&gt;
+  &lt;nombre&gt;Universidad Central&lt;/nombre&gt;
+  &lt;facultad&gt;
+    &lt;nombre&gt;_____&lt;/nombre&gt;
+    &lt;programa&gt;
+      &lt;nombre&gt;_____&lt;/nombre&gt;
+      &lt;curso&gt;
+        &lt;codigo&gt;_____&lt;/codigo&gt;
+        &lt;nombre&gt;_____&lt;/nombre&gt;
+        &lt;estudiante&gt;
+          &lt;id&gt;_____&lt;/id&gt;
+          &lt;nombre&gt;_____&lt;/nombre&gt;
+        &lt;/estudiante&gt;
+      &lt;/curso&gt;
+    &lt;/programa&gt;
+  &lt;/facultad&gt;
+&lt;/universidad&gt;</code></pre>
+
+        <h3>Casos con errores para depuración (XML)</h3>
+        <p>Identifique y corrija los errores presentes en el siguiente documento XML:</p>
+        <pre><code>&lt;curso&gt;
+  &lt;codigo&gt;IS202&lt;/codigo&gt;
+  &lt;nombre&gt;Estructuras de Datos
+  &lt;estudiante&gt;
+    &lt;id&gt;2001&lt;/id&gt;
+    &lt;nombre&gt;Carlos Ruiz&lt;/nombre&gt;
+  &lt;/estudiante&gt;
+&lt;/curso&gt;</code></pre>
+
+      <section id="json">
+        <h2>JSON (JavaScript Object Notation)</h2>
+
+        <h3>Definición</h3>
+        <p>
+          JSON es un formato ligero de intercambio de datos basado en texto, fácil de leer y escribir para los humanos y sencillo
+          de procesar para las máquinas. Utiliza una estructura de pares clave-valor y arreglos.
+        </p>
+
+        <h3>Aplicaciones</h3>
+        <ul>
+          <li>Comunicación entre aplicaciones web y servidores (APIs REST).</li>
+          <li>Almacenamiento de configuraciones.</li>
+          <li>Intercambio de datos en aplicaciones móviles.</li>
+          <li>Persistencia de datos en bases NoSQL.</li>
+        </ul>
+
+        <h3>Herramientas y editores</h3>
+        <ul>
+          <li>Visual Studio Code</li>
+          <li>Sublime Text</li>
+          <li>Postman</li>
+          <li>JSON Formatter Online</li>
+        </ul>
+
+        <h3>Ejemplos de código JSON</h3>
+        <pre><code>{
+  "nombre": "Ana",
+  "edad": 25
+}</code></pre>
+
+        <pre><code>{
+  "titulo": "Programación",
+  "autor": "Juan Pérez"
+}</code></pre>
+
+        <pre><code>{
+  "curso": "Bases de Datos",
+  "creditos": 3
+}</code></pre>
+
+        <pre><code>{
+  "producto": {
+    "nombre": "Laptop",
+    "precio": 2500
+  }
+}</code></pre>
+
+<h3>Errores comunes en JSON</h3>
+        <pre><code>{
+  "nombre": "Ana",
+  "edad": 25,  
+}  // Coma final no permitida</code></pre>
+        <pre><code>{
+  nombre: "Ana",
+  edad: 25
+}  // Claves sin comillas</code></pre>
+
+        <pre><code>{
+  "universidad": "Instituto Tecnológico",
+  "facultad": "Ingeniería"
+}</code></pre>
+
+<h3>Ejercicios prácticos (JSON)</h3>
+        <p><strong>Ejercicio 3:</strong> Cree un archivo JSON que represente el inventario de una tienda. Debe incluir categorías, productos, precios, cantidades y proveedores. El archivo debe contener al menos 20 líneas de código JSON correctamente estructurado.</p>
+        <pre><code>{
+  "tienda": "Tech Store",
+  "categorias": [
+    {
+      "nombre": "Computadores",
+      "productos": [
+        {
+          "id": 1,
+          "nombre": "Laptop",
+          "precio": 2500,
+          "cantidad": 10,
+          "proveedor": "Proveedor A"
+        },
+        {
+          "id": 2,
+          "nombre": "Tablet",
+          "precio": 1200,
+          "cantidad": 15,
+          "proveedor": "Proveedor B"
+        }
+      ]
+    }
+  ]
+}</code></pre>
+
+        <p><strong>Ejercicio 4:</strong> Explique cómo la estructura del JSON facilita su uso en aplicaciones web modernas y qué ventajas ofrece frente a una estructura equivalente en XML.</p>
+      </section>
+
+        <h3>Preguntas de selección múltiple (única respuesta)</h3>
+        <div class="question">1. JSON se basa principalmente en:
+          <ul>
+            <li>a) Etiquetas jerárquicas</li>
+            <li>b) Pares clave-valor</li>
+            <li>c) Archivos binarios</li>
+            <li>d) Lenguaje SQL</li>
+          </ul>
+        </div>
+        <div class="question">2. Una ventaja clave de JSON es:
+          <ul>
+            <li>a) Mayor complejidad</li>
+            <li>b) Menor legibilidad</li>
+            <li>c) Ligereza y simplicidad</li>
+            <li>d) Uso exclusivo en XML</li>
+          </ul>
+        </div>
+        <div class="question">3. JSON es ampliamente utilizado en:
+          <ul>
+            <li>a) APIs web</li>
+            <li>b) Edición de imágenes</li>
+            <li>c) Sistemas operativos</li>
+            <li>d) Controladores de hardware</li>
+          </ul>
+        </div>
+
+        <h3>Preguntas abiertas para discusión</h3>
+        <ul>
+          <li>¿Por qué JSON se ha convertido en el formato dominante para APIs modernas?</li>
+          <li>¿Qué limitaciones presenta JSON en comparación con XML?</li>
+        </ul>
+            
+
+        <h3>Ejercicios incompletos para el estudiante (JSON)</h3>
+        <p>Complete el siguiente archivo JSON agregando los valores faltantes y asegurando una estructura válida.</p>
+        <pre><code>{
+  "empresa": "_____",
+  "empleados": [
+    {
+      "id": _____,
+      "nombre": "_____",
+      "cargo": "_____",
+      "salario": _____
+    },
+    {
+      "id": _____,
+      "nombre": "_____",
+      "cargo": "_____",
+      "salario": _____
+    }
+  ]
+}</code></pre>
+
+        <h3>Casos con errores para depuración (JSON)</h3>
+        <p>Analice el siguiente JSON e identifique todos los errores de sintaxis y estructura:</p>
+        <pre><code>{
+  "empresa": "TechSoft",
+  "empleados": [
+    {
+      "id": 1,
+      "nombre": "Laura",
+      "cargo": "Analista",
+      "salario": 3200,
+    }
+    {
+      "id": 2
+      "nombre": "Miguel",
+      "cargo": "Desarrollador"
+      "salario": 4000
+    }
+  ]
+}</code></pre>
+      </section>
+
+      <footer>
+        <p>Material académico de apoyo - Formatos de intercambio de datos</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // JavaScript básico para futuras extensiones interactivas
+    console.log("Notas de clase XML y JSON cargadas correctamente");
+  </script>
+</body>
+</html>
