@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Técnica, Tecnología e Ingeniería - Nivel Universitario</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  background-color: #f5f7fa;
+}
+
+/* ===== MENÚ ===== */
+nav {
+  width: 300px;
+  background-color: #0f172a;
+  color: #fff;
+  height: 100vh;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+nav h2 { font-size: 18px; margin-bottom: 15px; }
+
+.tree ul { list-style: none; padding-left: 15px; }
+.tree li { cursor: pointer; margin: 6px 0; }
+.tree li span { color: #c7d2fe; }
+.tree li span:hover { color: #fff; text-decoration: underline; }
+.tree ul { display: none; }
+
+/* ===== CONTENIDO ===== */
+main {
+  flex: 1;
+  padding: 40px;
+  background-color: #ffffff;
+  overflow-y: auto;
+}
+
+section { margin-bottom: 50px; }
+h1 { color: #020617; }
+h2 { color: #1d4ed8; }
+h3 { color: #334155; }
+p, li { line-height: 1.6; color: #334155; }
+
+.ejemplo {
+  background-color: #e0f2fe;
+  padding: 15px;
+  border-left: 5px solid #0284c7;
+  margin: 15px 0;
+}
+
+.actividad {
+  background-color: #fef9c3;
+  padding: 15px;
+  border-left: 5px solid #ca8a04;
+  margin: 20px 0;
+}
+
+.caso {
+  background-color: #d1fae5;
+  padding: 15px;
+  border-left: 5px solid #10b981;
+  margin: 20px 0;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== MENÚ ===== -->
+<nav>
+  <h2>📚 Contenidos</h2>
+  <div class="tree">
+    <ul style="display:block;">
+      <li><span onclick="toggle(this)">Introducción</span>
+        <ul><li><a href="#intro">Contexto y objetivos</a></li></ul>
+      </li>
+      <li><span onclick="toggle(this)">Técnica</span>
+        <ul><li><a href="#tecnica">Definición</a></li>
+            <li><a href="#tecnica-ej">Ejemplos</a></li></ul>
+      </li>
+      <li><span onclick="toggle(this)">Tecnología</span>
+        <ul><li><a href="#tecnologia">Definición</a></li>
+            <li><a href="#tecnologia-ej">Ejemplos</a></li></ul>
+      </li>
+      <li><span onclick="toggle(this)">Ingeniería</span>
+        <ul><li><a href="#ingenieria">Definición</a></li>
+            <li><a href="#ingenieria-ej">Ejemplos</a></li></ul>
+      </li>
+      <li><span onclick="toggle(this)">Casos reales STEM</span>
+        <ul><li><a href="#casos">Estudio de aplicaciones</a></li></ul>
+      </li>
+      <li><span onclick="toggle(this)">Actividades</span>
+        <ul><li><a href="#actividades">Preguntas y ejercicios</a></li></ul>
+      </li>
+      <li><span onclick="toggle(this)">Guía docente</span>
+        <ul><li><a href="#guia">Respuestas sugeridas</a></li></ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== CONTENIDO ===== -->
+<main>
+
+<section id="intro">
+<h1>Introducción</h1>
+<p>
+En la universidad, entender la relación entre <strong>técnica, tecnología e ingeniería</strong> permite a los estudiantes analizar cómo la ciencia se traduce en soluciones prácticas y productos innovadores.  
+Se busca desarrollar pensamiento crítico y capacidad de aplicar conocimientos en situaciones reales.
+</p>
+</section>
+
+<section id="tecnica">
+<h2>1. Técnica</h2>
+<p>
+La <strong>técnica</strong> es la manera estructurada de realizar tareas mediante habilidades, procedimientos o métodos. En el contexto universitario, se estudia cómo la técnica puede optimizar procesos y preparar la base para la tecnología.
+</p>
+
+<div class="ejemplo" id="tecnica-ej">
+<strong>Ejemplos:</strong>
+<ul>
+  <li>Protocolos de laboratorio para análisis químico.</li>
+  <li>Procedimientos de soldadura en ingeniería mecánica.</li>
+  <li>Técnicas de modelado en CAD.</li>
+</ul>
+</div>
+</section>
+
+<section id="tecnologia">
+<h2>2. Tecnología</h2>
+<p>
+La <strong>tecnología</strong> aplica conocimiento científico y técnico para desarrollar soluciones, productos o procesos. En STEM, la tecnología conecta la teoría con la práctica.
+</p>
+
+<div class="ejemplo" id="tecnologia-ej">
+<strong>Ejemplos:</strong>
+<ul>
+  <li>Impresoras 3D para prototipos.</li>
+  <li>Software de simulación de circuitos eléctricos.</li>
+  <li>Sistemas automatizados de cultivo hidropónico.</li>
+</ul>
+</div>
+</section>
+
+<section id="ingenieria">
+<h2>3. Ingeniería</h2>
+<p>
+La <strong>ingeniería</strong> integra ciencia, matemáticas y técnica para diseñar, analizar y optimizar sistemas, procesos y productos. Es la disciplina que convierte conocimiento en soluciones concretas.
+</p>
+
+<div class="ejemplo" id="ingenieria-ej">
+<strong>Ejemplos:</strong>
+<ul>
+  <li>Diseño de estructuras sostenibles y resistentes a terremotos.</li>
+  <li>Desarrollo de aplicaciones de inteligencia artificial.</li>
+  <li>Optimización de sistemas de energía renovable.</li>
+</ul>
+</div>
+</section>
+
+<section id="casos">
+<h2>Casos reales STEM</h2>
+<div class="caso">
+<strong>Caso 1 – Ingeniería biomédica</strong>
+<p>
+El desarrollo de prótesis inteligentes combina la ingeniería, tecnología de sensores y conocimiento médico (técnica quirúrgica y biomecánica).  
+Este caso muestra la relación directa entre ciencia, ingeniería y tecnología aplicada.
+</p>
+</div>
+
+<div class="caso">
+<strong>Caso 2 – Energía renovable</strong>
+<p>
+La instalación de paneles solares implica ingeniería (diseño de sistemas), tecnología (paneles fotovoltaicos y controladores) y técnica (procedimientos de instalación y mantenimiento).
+</p>
+</div>
+
+<div class="caso">
+<strong>Caso 3 – Agricultura de precisión</strong>
+<p>
+Uso de drones y sensores para medir humedad, nutrientes y crecimiento de cultivos. Combina técnicas de medición, tecnología de sensores y análisis ingenieril para optimizar la producción.
+</p>
+</div>
+</section>
+
+<section id="actividades">
+<h2>🧪 Actividades y ejercicios</h2>
+
+<div class="actividad">
+<strong>Actividad 1 – Análisis comparativo</strong>
+<p>
+Elabora un cuadro comparativo que diferencie técnica, tecnología e ingeniería usando ejemplos del curso o tu carrera.
+</p>
+</div>
+
+<div class="actividad">
+<strong>Actividad 2 – Aplicación STEM</strong>
+<p>
+Escoge un problema real (energía, salud o industria). Describe cómo la técnica, tecnología e ingeniería se integran para solucionarlo.
+</p>
+</div>
+
+<div class="actividad">
+<strong>Actividad 3 – Reflexión crítica</strong>
+<p>
+¿Cómo impacta la innovación tecnológica en la sociedad y qué papel tiene la ingeniería en minimizar riesgos o daños?
+</p>
+</div>
+</section>
+
+<section id="guia">
+<h2>📄 Guía docente – Respuestas sugeridas</h2>
+
+<div class="actividad">
+<strong>Actividad 1</strong>
+<ul>
+  <li>Técnica: protocolo, procedimiento o método. Ej: ensayos de laboratorio.</li>
+  <li>Tecnología: producto o proceso basado en ciencia. Ej: simulación CAD, software educativo.</li>
+  <li>Ingeniería: diseño y optimización. Ej: desarrollo de prótesis inteligentes.</li>
+</ul>
+</div>
+
+<div class="actividad">
+<strong>Actividad 2</strong>
+<ul>
+  <li>Ejemplo problema: mejorar eficiencia energética en un edificio.</li>
+  <li>Técnica: instalación y calibración de sensores de temperatura y consumo.</li>
+  <li>Tecnología: sensores IoT, software de gestión energética.</li>
+  <li>Ingeniería: diseño del sistema de control, integración de software y hardware, optimización del consumo.</li>
+</ul>
+</div>
+
+<div class="actividad">
+<strong>Actividad 3</strong>
+<p>
+La innovación tecnológica mejora productividad, calidad de vida y sostenibilidad. La ingeniería asegura seguridad, eficiencia y adaptación de la tecnología a la realidad social.
+</p>
+</div>
+
+</section>
+
+</main>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+function toggle(element) {
+  const submenu = element.nextElementSibling;
+  submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>

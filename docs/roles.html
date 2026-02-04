@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Laboratorio Digital Completo - Roles en Ciencia de Datos</title>
+<style>
+/* ===== Estilos Generales ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  background-color: #f5f6fa;
+  color: #1e293b;
+}
+
+/* ===== Menú Lateral ===== */
+nav {
+  width: 300px;
+  background-color: #1e293b;
+  color: #fff;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+}
+nav h2 { 
+  font-size: 20px; 
+  margin-bottom: 20px; 
+  color: #38bdf8;
+}
+nav .tree ul { 
+  list-style: none; 
+  padding-left: 10px; 
+}
+nav .tree li { 
+  margin: 8px 0; 
+  cursor: pointer; 
+}
+nav .tree li span { 
+  color: #cbd5e1; 
+  font-weight: 500;
+}
+nav .tree li span:hover { 
+  color: #fff; 
+  text-decoration: underline; 
+}
+nav .tree a { 
+  color: #cbd5e1; 
+  text-decoration: none; 
+}
+nav .tree a:hover { 
+  color: #fff; 
+}
+
+/* ===== Contenido Principal ===== */
+main { 
+  flex: 1; 
+  padding: 40px; 
+  overflow-y: auto; 
+}
+section { margin-bottom: 50px; }
+h1 { color: #0f172a; font-size: 28px; }
+h2 { color: #1d4ed8; font-size: 22px; }
+h3 { color: #2563eb; font-size: 18px; }
+p { line-height: 1.6; }
+
+/* ===== Definición y Actividad ===== */
+.definicion {
+  background-color: #e0f7fa;
+  border-left: 5px solid #00bcd4;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 4px;
+}
+.actividad {
+  background-color: #fff3cd;
+  border-left: 5px solid #ffca28;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+.feedback {
+  margin-top: 10px;
+  font-weight: bold;
+}
+.feedback.correct { color: #10b981; }
+.feedback.incorrect { color: #ef4444; }
+.feedback.info { color: #1d4ed8; font-style: italic; }
+
+/* ===== Botón ===== */
+button {
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover { background-color: #1e40af; }
+</style>
+</head>
+<body>
+
+<nav>
+<h2>📊 Menú</h2>
+<div class="tree">
+  <ul style="display:block;">
+    <li><span onclick="toggle(this)">Roles</span>
+      <ul>
+        <li><a href="#analista">Analista de Datos</a></li>
+        <li><a href="#cientifico">Científico de Datos</a></li>
+        <li><a href="#ingeniero_datos">Ingeniero de Datos</a></li>
+        <li><a href="#ingeniero_ciencia">Ingeniero en Ciencia de Datos</a></li>
+        <li><a href="#gestor_base">Gestor de Base de Datos</a></li>
+        <li><a href="#arquitecto">Arquitecto de Datos</a></li>
+        <li><a href="#ingeniero_conocimiento">Ingeniero de Conocimiento</a></li>
+        <li><a href="#ingeniero_ml">Ingeniero de Aprendizaje de Máquina</a></li>
+      </ul>
+    </li>
+    <li><span onclick="toggle(this)">Escenarios</span>
+      <ul>
+        <li><a href="#escenario1">Marketing Digital</a></li>
+        <li><a href="#escenario2">Salud</a></li>
+        <li><a href="#escenario3">Finanzas / eCommerce</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+</nav>
+
+<main>
+<section>
+<h1>Roles en Ciencia de Datos</h1>
+<p>Bienvenido</p>
+</section>
+
+<!-- Roles -->
+<section id="analista">
+<h2>Analista de Datos</h2>
+<div class="definicion">
+<p>Analiza datos y crea reportes y dashboards para comunicar insights de negocio.</p>
+<p><strong>Habilidades:</strong> SQL, Excel, visualización, estadística básica, comunicación.</p>
+</div>
+</section>
+
+<section id="cientifico">
+<h2>Científico de Datos</h2>
+<div class="definicion">
+<p>Construye modelos predictivos y analiza patrones complejos para decisiones basadas en datos.</p>
+<p><strong>Habilidades:</strong> Python/R, ML, estadística avanzada, storytelling, modelado.</p>
+</div>
+</section>
+
+<section id="ingeniero_datos">
+<h2>Ingeniero de Datos</h2>
+<div class="definicion">
+<p>Diseña pipelines para preparar datos limpios y organizados para análisis y modelos.</p>
+<p><strong>Habilidades:</strong> SQL/NoSQL, ETL, Big Data, Python, arquitectura de datos.</p>
+</div>
+</section>
+
+<section id="ingeniero_ciencia">
+<h2>Ingeniero en Ciencia de Datos</h2>
+<div class="definicion">
+<p>Integra ingeniería de datos y ciencia de datos para preparar modelos listos para producción escalable.</p>
+<p><strong>Habilidades:</strong> programación, ML, estadísticas, DevOps de ML.</p>
+</div>
+</section>
+
+<section id="gestor_base">
+<h2>Gestor de Base de Datos (DBA)</h2>
+<div class="definicion">
+<p>Administra bases de datos corporativas, asegurando disponibilidad, seguridad y rendimiento.</p>
+<p><strong>Habilidades:</strong> SQL, administración de DB, backup/recovery, optimización, seguridad.</p>
+</div>
+</section>
+
+<section id="arquitecto">
+<h2>Arquitecto de Datos</h2>
+<div class="definicion">
+<p>Define la infraestructura de datos y cómo se integran y escalan dentro de la organización.</p>
+<p><strong>Habilidades:</strong> modelado de datos, cloud, Big Data, gobernanza, pipelines.</p>
+</div>
+</section>
+
+<section id="ingeniero_conocimiento">
+<h2>Ingeniero de Conocimiento</h2>
+<div class="definicion">
+<p>Convierte datos en conocimiento estructurado, usando grafos de conocimiento y NLP.</p>
+<p><strong>Habilidades:</strong> NLP, grafos, semántica, extracción de información.</p>
+</div>
+</section>
+
+<section id="ingeniero_ml">
+<h2>Ingeniero de Aprendizaje de Máquina</h2>
+<div class="definicion">
+<p>Implementa modelos de ML a producción, asegurando eficiencia, escalabilidad y mantenimiento.</p>
+<p><strong>Habilidades:</strong> Python/Java, frameworks ML, pipelines, MLOps.</p>
+</div>
+</section>
+
+<!-- Escenarios -->
+<section id="escenario1">
+<h2>Escenario 1: Marketing Digital</h2>
+<div class="actividad">
+<p>Predicción de clics en campañas de email.</p>
+
+<p>1. Limpiar y estructurar datos:</p>
+<select id="m1q1">
+  <option value="">--Selecciona--</option>
+  <option value="Ingeniero de Datos">Ingeniero de Datos</option>
+  <option value="Analista de Datos">Analista de Datos</option>
+</select>
+<div id="m1f1" class="feedback"></div>
+
+<p>2. Analizar comportamiento y generar reportes:</p>
+<select id="m1q2">
+  <option value="">--Selecciona--</option>
+  <option value="Analista de Datos">Analista de Datos</option>
+  <option value="Científico de Datos">Científico de Datos</option>
+</select>
+<div id="m1f2" class="feedback"></div>
+
+<p>3. Construir modelo predictivo:</p>
+<select id="m1q3">
+  <option value="">--Selecciona--</option>
+  <option value="Científico de Datos">Científico de Datos</option>
+  <option value="Ingeniero de Aprendizaje de Máquina">Ingeniero de Aprendizaje de Máquina</option>
+</select>
+<div id="m1f3" class="feedback"></div>
+</div>
+</section>
+
+<section id="escenario2">
+<h2>Escenario 2: Salud</h2>
+<div class="actividad">
+<p>Predicción de readmisión de pacientes y alertas automáticas.</p>
+
+<p>1. Integrar datos clínicos:</p>
+<select id="s2q1">
+  <option value="">--Selecciona--</option>
+  <option value="Arquitecto de Datos">Arquitecto de Datos</option>
+  <option value="Ingeniero de Datos">Ingeniero de Datos</option>
+</select>
+<div id="s2f1" class="feedback"></div>
+
+<p>2. Implementar modelo en producción:</p>
+<select id="s2q2">
+  <option value="">--Selecciona--</option>
+  <option value="Ingeniero de Aprendizaje de Máquina">Ingeniero de Aprendizaje de Máquina</option>
+  <option value="Científico de Datos">Científico de Datos</option>
+</select>
+<div id="s2f2" class="feedback"></div>
+
+<p>3. Generar alertas automáticas:</p>
+<select id="s2q3">
+  <option value="">--Selecciona--</option>
+  <option value="Ingeniero de Conocimiento">Ingeniero de Conocimiento</option>
+  <option value="Analista de Datos">Analista de Datos</option>
+</select>
+<div id="s2f3" class="feedback"></div>
+</div>
+</section>
+
+<section id="escenario3">
+<h2>Escenario 3: Finanzas / eCommerce</h2>
+<div class="actividad">
+<p>Predicción de riesgo de impago y recomendaciones de productos en un eCommerce.</p>
+
+<p>1. Limpiar y preparar datos financieros y de clientes:</p>
+<select id="f3q1">
+  <option value="">--Selecciona--</option>
+  <option value="Ingeniero de Datos">Ingeniero de Datos</option>
+  <option value="Analista de Datos">Analista de Datos</option>
+</select>
+<div id="f3f1" class="feedback"></div>
+
+<p>2. Construir modelo de riesgo crediticio:</p>
+<select id="f3q2">
+  <option value="">--Selecciona--</option>
+  <option value="Científico de Datos">Científico de Datos</option>
+  <option value="Ingeniero de Aprendizaje de Máquina">Ingeniero de Aprendizaje de Máquina</option>
+</select>
+<div id="f3f2" class="feedback"></div>
+
+<p>3. Generar recomendaciones personalizadas para clientes:</p>
+<select id="f3q3">
+  <option value="">--Selecciona--</option>
+  <option value="Ingeniero de Conocimiento">Ingeniero de Conocimiento</option>
+  <option value="Analista de Datos">Analista de Datos</option>
+</select>
+<div id="f3f3" class="feedback"></div>
+</div>
+</section>
+
+<!-- Botón general -->
+<button onclick="verificarTodo()">Verificar Todo</button>
+<div id="resultadoTodo" class="feedback"></div>
+
+<script>
+function toggle(element) {
+  const submenu = element.nextElementSibling;
+  submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+}
+
+// Respuestas de todos los escenarios
+const respuestasTodo = {
+  m1q1: {resp:"Ingeniero de Datos", exp:"Preparar datos limpios y pipelines es tarea del ingeniero de datos."},
+  m1q2: {resp:"Analista de Datos", exp:"Analista interpreta datos y genera reportes para marketing."},
+  m1q3: {resp:"Científico de Datos", exp:"Construir el modelo predictivo corresponde al científico de datos."},
+  s2q1: {resp:"Arquitecto de Datos", exp:"Diseñar la integración de datos clínicos es responsabilidad del arquitecto."},
+  s2q2: {resp:"Ingeniero de Aprendizaje de Máquina", exp:"Implementar modelo en producción es tarea del ingeniero de ML."},
+  s2q3: {resp:"Ingeniero de Conocimiento", exp:"Alertas automáticas usando reglas y NLP son tarea del ingeniero de conocimiento."},
+  f3q1: {resp:"Ingeniero de Datos", exp:"Preparar datos financieros y de clientes es tarea del ingeniero de datos."},
+  f3q2: {resp:"Científico de Datos", exp:"Construir modelo de riesgo crediticio es tarea del científico de datos."},
+  f3q3: {resp:"Ingeniero de Conocimiento", exp:"Generar recomendaciones personalizadas es tarea del ingeniero de conocimiento."}
+};
+
+function verificarTodo() {
+  let correctas = 0;
+  for (let key in respuestasTodo) {
+    const select = document.getElementById(key);
+    const feedback = document.getElementById(key.replace('q','f'));
+    if(select.value===respuestasTodo[key].resp){
+      feedback.textContent = "✅ Correcto: "+respuestasTodo[key].exp;
+      feedback.className = "feedback correct";
+      correctas++;
+    } else {
+      feedback.textContent = "❌ Incorrecto. Respuesta correcta: "+respuestasTodo[key].resp+". "+respuestasTodo[key].exp;
+      feedback.className = "feedback incorrect";
+    }
+  }
+  const resultado = document.getElementById('resultadoTodo');
+  resultado.textContent = `Has acertado ${correctas} de ${Object.keys(respuestasTodo).length} tareas en todos los escenarios.`;
+  resultado.className = "feedback info";
+}
+</script>
+
+</body>
+</html>
