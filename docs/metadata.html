@@ -85,8 +85,6 @@ footer a{color:#FFD84D}
 
 <div class="layout">
 <nav aria-label="Índice de contenidos">
-  <strong>En esta clase</strong>
-  <a href="#objetivos">Objetivos</a>
   <a href="#concepto">1. Concepto</a>
   <a href="#utilidad">2. ¿Para qué sirven?</a>
   <a href="#tipos">3. Tipos de metadatos</a>
@@ -100,14 +98,12 @@ footer a{color:#FFD84D}
 
 <main>
 <section id="objetivos">
-  <h2>Objetivos de aprendizaje</h2>
-  <ul>
-    <li>Explicar qué es un metadato y diferenciarlo de los datos que describe.</li>
-    <li>Reconocer metadatos descriptivos, estructurales, administrativos, técnicos, de preservación y de uso.</li>
-    <li>Interpretar ejemplos sencillos de metadatos en tablas, JSON, XML y esquemas de referencia.</li>
-    <li>Seleccionar metadatos pertinentes para describir y administrar un recurso digital.</li>
-  </ul>
+  
   <div class="callout gold"><strong>Idea central:</strong> los metadatos permiten identificar, encontrar, comprender, organizar, administrar y conservar los datos o recursos a los que se refieren.</div>
+  <div class="diagram" aria-label="Ciclo de uso de los metadatos">
+    <div>Crear el recurso</div><b>→</b><div>Describirlo</div><b>→</b><div>Encontrarlo y usarlo</div><b>→</b><div>Administrarlo y conservarlo</div>
+  </div>
+  <p>El registro puede ser correcto desde el punto de vista operativo y, aun así, resultar difícil de interpretar si no se documentan sus unidades, el significado de los campos, quién lo generó y las condiciones de acceso.</p>
 </section>
 
 <section id="concepto">
@@ -164,12 +160,7 @@ footer a{color:#FFD84D}
     <p><strong>Ejemplos:</strong> responsable de custodia, fecha de ingreso al repositorio, restricciones de acceso, política de conservación.</p>
     <p><strong>Pregunta que responden:</strong> ¿cómo se gestiona y bajo qué condiciones puede usarse?</p>
   </div>
-  <div class="grid">
-    <div class="card"><h3>3.4 Técnicos</h3><p>Describen las propiedades técnicas del archivo o de la captura: formato, tamaño, resolución, duración, compresión, software de creación o suma de comprobación (checksum).</p></div>
-    <div class="card"><h3>3.5 De derechos</h3><p>Documentan titularidad, licencias, copyright, permisos y condiciones de reutilización. Ejemplo: licencia Creative Commons CC BY 4.0.</p></div>
-    <div class="card"><h3>3.6 De preservación y procedencia</h3><p>Registran acciones que afectan la continuidad e integridad del recurso: migraciones, conversiones, verificaciones, origen y agentes que realizaron cambios.</p></div>
-    <div class="card"><h3>3.7 De uso</h3><p>Describen cómo se utiliza un recurso: número de consultas o descargas, fecha de último acceso o patrones de uso. Pueden ser sensibles y deben gestionarse con criterios de privacidad.</p></div>
-  </div>
+  
   <h3>Comparación rápida</h3>
   <table>
     <thead><tr><th>Tipo</th><th>Ejemplo</th><th>Pregunta principal</th></tr></thead>
@@ -177,10 +168,7 @@ footer a{color:#FFD84D}
       <tr><td>Descriptivo</td><td>Autor: Ana Pérez</td><td>¿Quién creó el recurso?</td></tr>
       <tr><td>Estructural</td><td>El capítulo 2 contiene las secciones 2.1 y 2.2</td><td>¿Cómo se organiza?</td></tr>
       <tr><td>Administrativo</td><td>Acceso restringido a personal autorizado</td><td>¿Cómo se administra?</td></tr>
-      <tr><td>Técnico</td><td>Formato: PDF/A; tamaño: 2 MB</td><td>¿Qué características técnicas tiene?</td></tr>
-      <tr><td>Derechos</td><td>Licencia: CC BY 4.0</td><td>¿Qué usos están permitidos?</td></tr>
-      <tr><td>Preservación</td><td>Convertido de TIFF a JPEG 2000 el 2026-05-02</td><td>¿Qué cambios ha experimentado?</td></tr>
-      <tr><td>Uso</td><td>Última consulta: 2026-10-10</td><td>¿Cómo se ha utilizado?</td></tr>
+      
     </tbody>
   </table>
   <div class="callout warn"><strong>Nota:</strong> las categorías se pueden solapar. Por ejemplo, la fecha de creación de una fotografía puede ser descriptiva para una búsqueda y técnica cuando documenta el proceso de captura. La clasificación depende del propósito y del esquema utilizado.</div>
@@ -188,12 +176,7 @@ footer a{color:#FFD84D}
 
 <section id="notaciones">
   <h2>4. Notaciones, esquemas y estándares</h2>
-  <p>Conviene distinguir tres conceptos:</p>
-  <ul>
-    <li><strong>Esquema o estándar de metadatos:</strong> define elementos, significado, reglas y, a veces, valores permitidos.</li>
-    <li><strong>Notación o serialización:</strong> forma concreta de representar y codificar esos elementos, por ejemplo XML o JSON.</li>
-    <li><strong>Vocabulario controlado:</strong> conjunto acordado de términos válidos, por ejemplo <code>público</code>, <code>interno</code> y <code>restringido</code> para clasificar acceso.</li>
-  </ul>
+  
   <h3>4.1 Tabla o diccionario de datos</h3>
   <p>Forma tabular muy usada para documentar bases de datos, conjuntos de datos y variables.</p>
   <table>
@@ -267,10 +250,7 @@ footer a{color:#FFD84D}
       <tr><td>Versión</td><td>1.1</td><td>Administrativo / preservación</td></tr>
     </tbody>
   </table>
-  <div class="diagram" aria-label="Ciclo de uso de los metadatos">
-    <div>Crear el recurso</div><b>→</b><div>Describirlo</div><b>→</b><div>Encontrarlo y usarlo</div><b>→</b><div>Administrarlo y conservarlo</div>
-  </div>
-  <p>El registro puede ser correcto desde el punto de vista operativo y, aun así, resultar difícil de interpretar si no se documentan sus unidades, el significado de los campos, quién lo generó y las condiciones de acceso.</p>
+  
 </section>
 
 <section id="calidad">
@@ -298,44 +278,22 @@ footer a{color:#FFD84D}
 
 <section id="fuentes">
   <h2>Fuentes y lecturas recomendadas</h2>
-  <p>Estas notas sintetizan conceptos generales y ejemplos didácticos. Para una implementación institucional, conviene consultar las especificaciones completas y la normativa aplicable.</p>
+  
   <ol class="source-list">
+  <li><strong>Video de apoyo</strong> Enlace de búsqueda de Google con el video identificado por el parámetro <code>edYCt01I8Q4</code>.<br><a href="https://www.youtube.com/watch?v=edYCt01I8Q4" target="_blank" rel="noopener">Abrir video en YouTube</a>. <span class="small">El enlace se incluye como recurso de apoyo; el contenido del video no se transcribe literalmente en estas notas.</span></li>
+    <li><strong>Lectura complementaria</strong> Recurso alojado en el repositorio de la Universitat Oberta de Catalunya.<br><a href="https://openaccess.uoc.edu/server/api/core/bitstreams/9d09d9f7-bba4-42c0-81b1-51e7d83afc20/content" target="_blank" rel="noopener">Abrir documento</a>.</li>
     <li><strong>Archivo General de la Nación de Colombia.</strong> <em>Guía de metadatos: guía para la formulación de un esquema de metadatos para la gestión de documentos.</em><br><a href="https://www.archivogeneral.gov.co/sites/default/files/Estructura_Web/5_Consulte/Recursos/Publicacionees/GuiaDeMetadatos.pdf" target="_blank" rel="noopener">Consultar la guía en PDF</a>. También está listada en el <a href="https://www.archivogeneral.gov.co/consulte/recursos/publicaciones" target="_blank" rel="noopener">catálogo de publicaciones del AGN</a>.</li>
     <li><strong>Library of Congress.</strong> <em>METS: introducción y tutorial.</em> Explica cómo METS integra metadatos descriptivos, administrativos y estructurales para objetos digitales.<br><a href="https://www.loc.gov/standards/mets/METSOverview_spa.html" target="_blank" rel="noopener">Leer el tutorial de METS</a>.</li>
     <li><strong>Metadata Standards Index.</strong> <em>Metadata Object Description Schema (MODS).</em> Descripción del esquema bibliográfico XML y sus usos.<br><a href="https://msi.dublincore.org/standards/mods/" target="_blank" rel="noopener">Consultar MODS</a>.</li>
     <li><strong>Library of Congress.</strong> <em>Entender PREMIS</em>, documento en español sobre metadatos de preservación digital.<br><a href="https://www.loc.gov/standards/premis/understandingPREMIS_spanish_2021.pdf" target="_blank" rel="noopener">Descargar PDF</a>.</li>
-    <li><strong>Video de apoyo compartido por el docente.</strong> Enlace de búsqueda de Google con el video identificado por el parámetro <code>edYCt01I8Q4</code>.<br><a href="https://www.youtube.com/watch?v=edYCt01I8Q4" target="_blank" rel="noopener">Abrir video en YouTube</a>. <span class="small">El enlace se incluye como recurso de apoyo; el contenido del video no se transcribe literalmente en estas notas.</span></li>
-    <li><strong>Lectura complementaria compartida por el docente.</strong> Recurso alojado en el repositorio de la Universitat Oberta de Catalunya.<br><a href="https://openaccess.uoc.edu/server/api/core/bitstreams/9d09d9f7-bba4-42c0-81b1-51e7d83afc20/content" target="_blank" rel="noopener">Abrir documento</a>.</li>
+    
   </ol>
 </section>
 </main>
 </div>
 
-<footer><div class="inner"><strong>Notas de clase: Metadatos</strong><p>Material educativo editable. Puedes adaptar los ejemplos, agregar estándares de tu área y guardar una copia mediante <span class="kbd">Imprimir / guardar PDF</span>.</p></div></footer>
+<footer><div class="inner"><strong>Notas de clase: Metadatos</strong></div></footer>
 
-<script>
-function calificar(){
-  const respuestas={q1:"b",q2:"a",q3:"a",q4:"b",q5:"b"};
-  const explicaciones={
-    q1:"Un metadato describe una característica del recurso o conjunto de datos.",
-    q2:"Los metadatos estructurales describen la organización y las relaciones entre partes.",
-    q3:"PREMIS se utiliza para documentar información relevante para la preservación digital.",
-    q4:"JSON y XML son formatos de representación; no definen por sí solos todos los significados o reglas del dominio.",
-    q5:"Las licencias y condiciones de reutilización pertenecen a los metadatos de derechos."
-  };
-  let aciertos=0, respondidas=0, detalle=[];
-  for(const [pregunta,correcta] of Object.entries(respuestas)){
-    const seleccion=document.querySelector('input[name="'+pregunta+'"]:checked');
-    if(seleccion){
-      respondidas++;
-      if(seleccion.value===correcta){aciertos++;detalle.push("✓ "+explicaciones[pregunta]);}
-      else{detalle.push("✗ "+explicaciones[pregunta]);}
-    }else{detalle.push("• Sin responder: "+explicaciones[pregunta]);}
-  }
-  const resultado=document.getElementById("resultado");
-  resultado.textContent="Resultado: "+aciertos+" de 5 respuestas correctas ("+respondidas+" respondidas). "+(aciertos===5?"¡Excelente!":aciertos>=3?"Buen trabajo; revisa las explicaciones.":"Repasa las secciones y vuelve a intentarlo.")+" "+detalle.join(" ");
-  resultado.style.color=aciertos>=4?"#16794B":"#B42318";
-}
-</script>
+
 </body>
 </html>
