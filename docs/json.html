@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notas de clase: JSON</title>
+<style>
+:root {
+  --azul: #174ea6;
+  --rojo: #c62828;
+  --amarillo: #f9c80e;
+  --texto: #202938;
+  --muted: #526174;
+  --fondo: #f5f8fc;
+  --blanco: #ffffff;
+  --borde: #d9e2ef;
+  --verde: #16794b;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--fondo); color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.65;
+}
+header {
+  background: var(--azul); color: white; padding: 2.5rem 1rem;
+  border-bottom: 8px solid var(--amarillo);
+}
+.hero, main, footer { max-width: 1050px; margin: auto; }
+header h1 { margin: 0 0 .5rem; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+header p { max-width: 760px; margin-bottom: 0; color: #edf4ff; }
+nav {
+  background: var(--blanco); border-bottom: 1px solid var(--borde);
+  padding: .7rem 1rem; position: sticky; top: 0; z-index: 5;
+}
+nav .navinner { max-width: 1050px; margin: auto; display: flex; gap: .6rem; flex-wrap: wrap; }
+nav a { color: var(--azul); font-weight: 650; text-decoration: none; padding: .25rem .45rem; border-radius: 5px; }
+nav a:hover { background: #eaf1ff; }
+main { padding: 1.25rem 1rem 3rem; }
+section, .panel {
+  background: var(--blanco); border: 1px solid var(--borde);
+  border-radius: 14px; padding: clamp(1rem, 3vw, 1.6rem); margin: 1rem 0;
+  box-shadow: 0 4px 16px rgba(24, 50, 90, .045);
+}
+h2 { color: var(--azul); margin-top: 0; padding-bottom: .35rem; border-bottom: 3px solid var(--amarillo); }
+h3 { color: #173d75; margin-bottom: .35rem; }
+p { margin-top: .45rem; }
+code, pre { font-family: Consolas, "Courier New", monospace; }
+code { background: #eef3fa; border-radius: 4px; padding: .08rem .3rem; }
+pre {
+  overflow-x: auto; background: #101b2d; color: #f0f5ff;
+  padding: 1rem; border-radius: 9px; line-height: 1.5; font-size: .93rem;
+}
+pre code { background: transparent; padding: 0; color: inherit; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
+.card { border: 1px solid var(--borde); border-radius: 10px; padding: 1rem; background: #fcfdff; }
+.tag { display: inline-block; padding: .15rem .55rem; border-radius: 999px; font-size: .8rem; font-weight: 700; }
+.good { background: #e3f5ea; color: #12633c; }
+.bad { background: #fde8e7; color: #9b1c1c; }
+.note { border-left: 5px solid var(--azul); background: #edf4ff; padding: .8rem 1rem; border-radius: 5px; }
+.warning { border-left-color: var(--rojo); background: #fff0ef; }
+table { width: 100%; border-collapse: collapse; margin: .8rem 0; }
+th, td { text-align: left; border: 1px solid var(--borde); padding: .65rem; vertical-align: top; }
+th { background: #eaf1ff; }
+button {
+  border: 0; border-radius: 7px; padding: .65rem 1rem; cursor: pointer;
+  background: var(--azul); color: white; font-weight: 700; font-size: .95rem;
+}
+button:hover { filter: brightness(1.08); }
+button.secondary { background: #e7edf6; color: #173d75; }
+button.red { background: var(--rojo); }
+.question { border: 1px solid var(--borde); border-radius: 9px; padding: 1rem; margin: .8rem 0; }
+.question label { display: block; margin: .35rem 0; cursor: pointer; }
+.feedback { margin-top: .5rem; font-weight: 650; }
+.small { color: var(--muted); font-size: .92rem; }
+footer { padding: 1rem; color: var(--muted); }
+a { overflow-wrap: anywhere; }
+@media (max-width: 600px) {
+  nav { position: static; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <p><strong>NOTAS DE CLASE · DESARROLLO WEB</strong></p>
+    <h1>JSON: estructura, sintaxis y uso en la web</h1>
+    <p>Una guía práctica para leer, escribir, validar y consumir datos JSON con ejemplos y ejercicios.</p>
+  </div>
+</header>
+<nav aria-label="Navegación de la clase">
+  <div class="navinner">
+    <a href="#objetivos">Objetivos</a><a href="#definicion">Definición</a><a href="#sintaxis">Sintaxis</a>
+    <a href="#basicos">Ejemplos básicos</a><a href="#anidados">Anidados</a><a href="#errores">Errores</a>
+    <a href="#web">Herramientas</a><a href="#autoevaluacion">Autoevaluación</a>
+  </div>
+</nav>
+<main>
+<section id="objetivos">
+  <h2>1. Objetivos de aprendizaje</h2>
+  <ul>
+    <li>Explicar qué es JSON y para qué se utiliza.</li>
+    <li>Reconocer sus tipos de valores y reglas de sintaxis.</li>
+    <li>Distinguir ejemplos válidos de ejemplos con errores.</li>
+    <li>Validar JSON y consultar una API que devuelve JSON.</li>
+    <li>Comprender cómo JavaScript convierte texto JSON en datos utilizables.</li>
+  </ul>
+</section>
+
+<section id="definicion">
+  <h2>2. ¿Qué es JSON?</h2>
+  <p><strong>JSON</strong> significa <em>JavaScript Object Notation</em> (notación de objetos de JavaScript). Es un formato de texto ligero para representar e intercambiar datos estructurados entre aplicaciones. Aunque su nombre menciona JavaScript, JSON puede utilizarse con muchos lenguajes, como Python, Java, PHP y C#.</p>
+  <p>Se usa frecuentemente en API web: un servidor devuelve datos en JSON y una aplicación los interpreta para mostrarlos o procesarlos. Un archivo JSON suele tener la extensión <code>.json</code> y el tipo de contenido <code>application/json</code>.</p>
+  <div class="note"><strong>Idea clave:</strong> JSON es un formato de datos, no un lenguaje de programación. No contiene instrucciones, funciones ni comentarios.</div>
+  <h3>JSON y JavaScript no son exactamente lo mismo</h3>
+  <p>Se parecen, pero JSON tiene reglas más estrictas. Por ejemplo, en JSON las claves y las cadenas deben usar comillas dobles; las comillas simples y las funciones no están permitidas.</p>
+</section>
+
+<section id="sintaxis">
+  <h2>3. Sintaxis y reglas principales</h2>
+  <ul>
+    <li>Un <strong>objeto</strong> se delimita con llaves <code>{ }</code> y contiene pares <code>"clave": valor</code>.</li>
+    <li>Un <strong>arreglo</strong> se delimita con corchetes <code>[ ]</code> y contiene una lista de valores.</li>
+    <li>Las claves y las cadenas usan comillas dobles: <code>"nombre": "Ana"</code>.</li>
+    <li>Los pares clave-valor se separan con comas. No se escribe una coma después del último elemento.</li>
+    <li>Entre la clave y su valor va dos puntos (<code>:</code>).</li>
+    <li>Se permiten espacios y saltos de línea para mejorar la lectura.</li>
+    
+  </ul>
+  <pre><code>{
+  "nombre": "Ana",
+  "edad": 21,
+  "activo": true,
+  "cursos": ["HTML", "CSS", "JSON"]
+}</code></pre>
+  <h3>Tipos de valores admitidos</h3>
+  <table>
+    <thead><tr><th>Tipo</th><th>Ejemplo</th><th>Descripción</th></tr></thead>
+    <tbody>
+      <tr><td>Cadena (string)</td><td><code>"Hola"</code></td><td>Texto entre comillas dobles.</td></tr>
+      <tr><td>Número (number)</td><td><code>25</code>, <code>3.14</code>, <code>-8</code></td><td>Enteros o decimales. No se escriben entre comillas si deben ser números.</td></tr>
+      <tr><td>Booleano (boolean)</td><td><code>true</code> / <code>false</code></td><td>Representa verdadero o falso, en minúsculas.</td></tr>
+      <tr><td>Nulo (null)</td><td><code>null</code></td><td>Representa la ausencia intencional de un valor.</td></tr>
+      <tr><td>Objeto</td><td><code>{"ciudad": "Cali"}</code></td><td>Conjunto de propiedades clave-valor.</td></tr>
+      <tr><td>Arreglo (array)</td><td><code>["rojo", "azul"]</code></td><td>Lista ordenada de valores, incluso objetos u otros arreglos.</td></tr>
+    </tbody>
+  </table>
+  <h3>Trabajar con JSON en JavaScript</h3>
+  <pre><code>// Texto JSON → objeto/valor de JavaScript
+const texto = '{"nombre":"Ana","edad":21}';
+const persona = JSON.parse(texto);
+console.log(persona.nombre); // Ana
+
+// Objeto de JavaScript → texto JSON
+const salida = JSON.stringify(persona);
+console.log(salida);</code></pre>
+  <p class="small"><a href="https://www.w3schools.com/js/js_json_stringify.asp">ver ejemplo de ejecución aquí</a></p>
+</section>
+
+<section id="basicos">
+  <h2>4. Cinco ejemplos básicos </h2>
+  <div class="grid">
+    <article class="card"><span class="tag good">Ejemplo 1</span>
+	<pre><code>{
+  "nombre": "Laura",
+  "edad": 25,
+  "ciudad": "Medellín",
+  "estudiante": true
+}</code></pre></article>
+     <article class="card"><span class="tag good">Ejemplo 2</span>
+	<pre><code>{
+  "id": 101,
+  "producto": "Teclado",
+  "precio": 85000,
+  "disponible": true
+}</code></pre></article>
+<article class="card"><span class="tag good">Ejemplo 3</span>
+	<pre><code>{
+  "estudiante": "Carlos",
+  "asignaturas": [
+    "Programación",
+    "Bases de datos",
+    "Desarrollo web"
+  ]
+}</code></pre></article>
+<article class="card"><span class="tag good">Ejemplo 4</span>
+	<pre><code>{
+  "pedido": 5001,
+  "cliente": "Ana",
+  "total": 150000,
+  "descuento": null,
+  "pagado": false
+}</code></pre></article>
+<article class="card"><span class="tag good">Ejemplo 5</span>
+	<pre><code>{
+  "ciudad": "Medellín",
+  "temperatura": 24.5,
+  "capital": false,
+  "poblacion": 2600000,
+  "coordenadas": null
+}</code></pre></article>
+  </div>
+</section>
+
+<section id="anidados">
+  <h2>5. Cinco ejemplos con objetos anidados</h2>
+  <p>Un objeto anidado es un objeto dentro de otro objeto. Los arreglos también pueden contener objetos. Esta estructura permite representar información relacionada.</p>
+  <h3>Ejemplo 1. Estudiante y dirección</h3>
+  <pre><code>{
+  "nombre": "Mateo",
+  "direccion": {
+    "ciudad": "Medellín",
+    "barrio": "Laureles"
+  }
+}</code></pre>
+  <p>Acceso en JavaScript: <code>datos.direccion.ciudad</code>.</p>
+  <h3>Ejemplo 2. Producto con fabricante</h3>
+  <pre><code>{
+  "producto": "Teclado",
+  "precio": 85000,
+  "fabricante": {
+    "nombre": "TecnoAndes",
+    "pais": "Colombia"
+  }
+}</code></pre>
+  <p>Acceso: <code>datos.fabricante.pais</code>.</p>
+  <h3>Ejemplo 3. Curso con lista de estudiantes</h3>
+  <pre><code>{
+  "curso": "Desarrollo web",
+  "estudiantes": [
+    {"nombre": "Sara", "nota": 4.5},
+    {"nombre": "Juan", "nota": 3.8}
+  ]
+}</code></pre>
+  <p>Acceso a la primera estudiante: <code>datos.estudiantes[0].nombre</code>.</p>
+  <h3>Ejemplo 4. Pedido con dirección y productos</h3>
+  <pre><code>{
+  "pedidoId": 1042,
+  "cliente": {
+    "nombre": "Camila",
+    "correo": "camila@example.com"
+  },
+  "productos": [
+    {"nombre": "Cuaderno", "cantidad": 2},
+    {"nombre": "Lápiz", "cantidad": 5}
+  ]
+}</code></pre>
+  <p>Acceso al segundo producto: <code>datos.productos[1].nombre</code>.</p>
+  <h3>Ejemplo 5. Información de una biblioteca</h3>
+  <pre><code>{
+  "biblioteca": {
+    "nombre": "Biblioteca Central",
+    "ubicacion": {
+      "ciudad": "Cali",
+      "sede": "Norte"
+    },
+    "libros": [
+      {
+        "titulo": "Introducción a Python",
+        "disponible": true
+      },
+      {
+        "titulo": "Bases de datos",
+        "disponible": false
+      }
+    ]
+  }
+}</code></pre>
+  <p>Acceso al estado del primer libro: <code>datos.biblioteca.libros[0].disponible</code>.</p>
+</section>
+
+<section id="errores">
+  <h2>6. Cinco ejemplos con errores: encuentra el problema</h2>
+  <p>Antes de abrir la respuesta, intenta identificar por qué cada fragmento no es JSON válido. El botón revela una explicación.</p>
+  <div class="question">
+    <h3>Error 1. Comillas simples</h3><pre><code>{ 'nombre': 'Laura' }</code></pre>
+    <button class="secondary" onclick="toggleAnswer('e1', this)">Mostrar respuesta</button>
+    <p id="e1" hidden><strong>Error:</strong> las claves y cadenas deben usar comillas dobles. Correcto: <code>{"nombre": "Laura"}</code>.</p>
+  </div>
+  <div class="question">
+    <h3>Error 2. Coma final</h3><pre><code>{
+  "edad": 20,
+}</code></pre>
+    <button class="secondary" onclick="toggleAnswer('e2', this)">Mostrar respuesta</button>
+    <p id="e2" hidden><strong>Error:</strong> no se permite una coma después de la última propiedad. Elimina la coma tras <code>20</code>.</p>
+  </div>
+  <div class="question">
+    <h3>Error 3. Falta dos puntos</h3><pre><code>{ "ciudad" "Bogotá" }</code></pre>
+    <button class="secondary" onclick="toggleAnswer('e3', this)">Mostrar respuesta</button>
+    <p id="e3" hidden><strong>Error:</strong> falta <code>:</code> entre la clave y el valor. Correcto: <code>{"ciudad": "Bogotá"}</code>.</p>
+  </div>
+  <div class="question">
+    <h3>Error 4. Valor no admitido</h3><pre><code>{ "telefono": undefined }</code></pre>
+    <button class="secondary" onclick="toggleAnswer('e4', this)">Mostrar respuesta</button>
+    <p id="e4" hidden><strong>Error:</strong> <code>undefined</code> no es un valor JSON válido. Usa, por ejemplo, <code>null</code> si representa ausencia de dato.</p>
+  </div>
+  <div class="question">
+    <h3>Error 5. Comentario no permitido</h3><pre><code>{
+  // datos del usuario
+  "nombre": "Pablo"
+}</code></pre>
+    <button class="secondary" onclick="toggleAnswer('e5', this)">Mostrar respuesta</button>
+    <p id="e5" hidden><strong>Error:</strong> JSON estándar no admite comentarios. Elimina la línea que comienza con <code>//</code>.</p>
+  </div>
+  <div class="note warning"><strong>Consejo:</strong> si un archivo no valida, revisa primero las comillas, los dos puntos, las comas, los corchetes y las llaves.</div>
+</section>
+
+<section id="web">
+  <h2>7. Sitios web útiles</h2>
+  <h3>Validar JSON</h3>
+  <div class="grid">
+    <article class="card">
+      <h3><a href="https://jsonlint.com/" target="_blank" rel="noopener noreferrer">JSONLint</a></h3>
+      <p>Pega tu texto JSON y comprueba si cumple la sintaxis. Es útil para localizar errores de formato.</p>
+    </article>
+    <article class="card">
+      <h3><a href="https://jsonformatter.org/json-validator" target="_blank" rel="noopener noreferrer">JSON Formatter &amp; Validator</a></h3>
+      <p>Permite validar y dar formato legible a documentos JSON.</p>
+    </article>
+  </div>
+  <h3>Consultar direcciones GET que devuelven JSON</h3>
+  <p>Abre estos enlaces en el navegador. Son API de práctica; normalmente muestran directamente la respuesta JSON.</p>
+  <div class="grid">
+    <article class="card">
+      <h3><a href="https://jsonplaceholder.typicode.com/posts/1" target="_blank" rel="noopener noreferrer">JSONPlaceholder — publicación 1</a></h3>
+      <p>Devuelve un objeto con campos como <code>userId</code>, <code>id</code>, <code>title</code> y <code>body</code>.</p>
+      <pre><code>GET /posts/1</code></pre>
+      <p><a href="https://jsonplaceholder.typicode.com/posts" target="_blank" rel="noopener noreferrer">Ver lista de publicaciones</a></p>
+    </article>
+    <article class="card">
+      <h3><a href="https://dummyjson.com/products/1" target="_blank" rel="noopener noreferrer">DummyJSON — producto 1</a></h3>
+      <p>Devuelve datos de un producto, como título, precio, descripción y categoría.</p>
+      <pre><code>GET /products/1</code></pre>
+      <p><a href="https://dummyjson.com/products" target="_blank" rel="noopener noreferrer">Ver lista de productos</a></p>
+    </article><br/>
+	 <article class="card">
+      <h3><a href="https://pokeapi.co/api/v2/pokemon/pikachu" target="_blank" rel="noopener noreferrer">Poke API — Pikachu</a></h3>
+      <p>Devuelve datos de un pokemon</p>
+      <pre><code>GET /pokemon/pikachu</code></pre>
+      
+    </article>
+	 <article class="card">
+      <h3><a href="https://swapi.py4e.com/" target="_blank" rel="noopener noreferrer">The Star Wars API</a></h3>
+      <p>Devuelve datos de The Star Wars Movie</p>
+           
+    </article>
+	
+  </div>
+  
+</section>
+
+<section id="autoevaluacion">
+  <h2>8. Autoevaluación</h2>
+  <p>Selecciona una respuesta en cada pregunta y pulsa <strong>Calificar</strong> para ver el resultado y la explicación.</p>
+  <form id="quiz">
+    <div class="question">
+      <p><strong>1. ¿Qué es JSON?</strong></p>
+      <label><input type="radio" name="q1" value="a"> Un lenguaje de programación ejecutable.</label>
+      <label><input type="radio" name="q1" value="b"> Un formato de texto para representar e intercambiar datos.</label>
+      <label><input type="radio" name="q1" value="c"> Un sistema gestor de bases de datos.</label>
+      <p class="feedback" id="f1"></p>
+    </div>
+    <div class="question">
+      <p><strong>2. ¿Cuál es una cadena válida en JSON?</strong></p>
+      <label><input type="radio" name="q2" value="a"> <code>'Hola'</code></label>
+      <label><input type="radio" name="q2" value="b"> <code>"Hola"</code></label>
+      <label><input type="radio" name="q2" value="c"> <code>"Hola</code></label>
+      <p class="feedback" id="f2"></p>
+    </div>
+    <div class="question">
+      <p><strong>3. ¿Cuál de estos valores no está permitido en JSON?</strong></p>
+      <label><input type="radio" name="q3" value="a"> <code>false</code></label>
+      <label><input type="radio" name="q3" value="b"> <code>null</code></label>
+      <label><input type="radio" name="q3" value="c"> <code>undefined</code></label>
+      <p class="feedback" id="f3"></p>
+    </div>
+    <div class="question">
+      <p><strong>4. En JavaScript, ¿qué hace <code>JSON.parse()</code>?</strong></p>
+      <label><input type="radio" name="q4" value="a"> Convierte texto JSON en un valor de JavaScript.</label>
+      <label><input type="radio" name="q4" value="b"> Envía automáticamente una petición GET.</label>
+      <label><input type="radio" name="q4" value="c"> Da color al texto JSON.</label>
+      <p class="feedback" id="f4"></p>
+    </div>
+    <div class="question">
+      <p><strong>5. ¿Qué error tiene este fragmento?</strong></p>
+      <pre><code>{ "activo": true, }</code></pre>
+      <label><input type="radio" name="q5" value="a"> El booleano debe ir entre comillas.</label>
+      <label><input type="radio" name="q5" value="b"> Hay una coma final después del último valor.</label>
+      <label><input type="radio" name="q5" value="c"> Los objetos no pueden tener valores booleanos.</label>
+      <p class="feedback" id="f5"></p>
+    </div>
+    <button type="submit">Calificar respuestas</button>
+    <button type="button" class="secondary" onclick="resetQuiz()">Reiniciar</button>
+    <p id="score" aria-live="polite"></p>
+  </form>
+</section>
+<section id="objetivos">
+  <h2>9. Retos</h2>
+  <p><b>Ejercicio 1. Registro de un estudiante</b><br/>
+Desarrolle un objeto JSON que permita representar 
+la información de un estudiante de una institución educativa. 
+El objeto debe incluir el nombre completo, la edad, el número de identificación, 
+el programa académico que cursa, si se encuentra matriculado actualmente y una
+lista con tres asignaturas que esté estudiando. Utilice los tipos de datos adecuados 
+para representar cada atributo.<hr/>
+<b>Ejercicio 2. Registro de un pedido en una tienda</b><br/>
+Construya un objeto JSON que represente un pedido realizado por un cliente en una tienda de tecnología. La información debe incluir el número del pedido, el nombre del cliente, la fecha en que se realizó, los productos comprados, el precio de cada producto, la cantidad solicitada, el valor total del pedido y si el pago ha sido confirmado. El pedido debe contener al menos dos productos y utilizar estructuras de datos apropiadas para organizar la información.</p>
+</section>
+</main>
+<footer>
+  <p>Material de estudio introductorio. © Notas de clase sobre JSON.</p>
+</footer>
+<script>
+function toggleAnswer(id, button) {
+  const answer = document.getElementById(id);
+  answer.hidden = !answer.hidden;
+  button.textContent = answer.hidden ? "Mostrar respuesta" : "Ocultar respuesta";
+}
+const answers = {
+  q1: {correct: "b", explanation: "JSON es un formato de texto para representar e intercambiar datos."},
+  q2: {correct: "b", explanation: "Las cadenas JSON deben escribirse entre comillas dobles."},
+  q3: {correct: "c", explanation: "undefined no es un valor JSON válido; null sí lo es."},
+  q4: {correct: "a", explanation: "JSON.parse() analiza texto JSON y devuelve el valor correspondiente de JavaScript."},
+  q5: {correct: "b", explanation: "JSON no permite una coma después del último elemento."}
+};
+document.getElementById("quiz").addEventListener("submit", function(event) {
+  event.preventDefault();
+  let score = 0;
+  for (const [question, data] of Object.entries(answers)) {
+    const selected = document.querySelector('input[name="' + question + '"]:checked');
+    const feedback = document.getElementById("f" + question.slice(1));
+    if (!selected) {
+      feedback.textContent = "Sin responder. " + data.explanation;
+      feedback.style.color = "#9b1c1c";
+    } else if (selected.value === data.correct) {
+      score++;
+      feedback.textContent = "Correcto. " + data.explanation;
+      feedback.style.color = "#16794b";
+    } else {
+      feedback.textContent = "Incorrecto. " + data.explanation;
+      feedback.style.color = "#9b1c1c";
+    }
+  }
+  document.getElementById("score").textContent = "Resultado: " + score + " de 5 respuestas correctas.";
+  document.getElementById("score").style.fontWeight = "700";
+});
+function resetQuiz() {
+  document.getElementById("quiz").reset();
+  document.querySelectorAll(".feedback").forEach(el => { el.textContent = ""; });
+  document.getElementById("score").textContent = "";
+}
+</script>
+</body>
+</html>
