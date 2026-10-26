@@ -85,32 +85,16 @@ a { overflow-wrap: anywhere; }
 <body>
 <header>
   <div class="hero">
-    <p><strong>NOTAS DE CLASE · DESARROLLO WEB</strong></p>
+    <p><strong>NOTAS DE CLASE</strong></p>
     <h1>JSON: estructura, sintaxis y uso en la web</h1>
     <p>Una guía práctica para leer, escribir, validar y consumir datos JSON con ejemplos y ejercicios.</p>
   </div>
 </header>
-<nav aria-label="Navegación de la clase">
-  <div class="navinner">
-    <a href="#objetivos">Objetivos</a><a href="#definicion">Definición</a><a href="#sintaxis">Sintaxis</a>
-    <a href="#basicos">Ejemplos básicos</a><a href="#anidados">Anidados</a><a href="#errores">Errores</a>
-    <a href="#web">Herramientas</a><a href="#autoevaluacion">Autoevaluación</a>
-  </div>
-</nav>
+
 <main>
-<section id="objetivos">
-  <h2>1. Objetivos de aprendizaje</h2>
-  <ul>
-    <li>Explicar qué es JSON y para qué se utiliza.</li>
-    <li>Reconocer sus tipos de valores y reglas de sintaxis.</li>
-    <li>Distinguir ejemplos válidos de ejemplos con errores.</li>
-    <li>Validar JSON y consultar una API que devuelve JSON.</li>
-    <li>Comprender cómo JavaScript convierte texto JSON en datos utilizables.</li>
-  </ul>
-</section>
 
 <section id="definicion">
-  <h2>2. ¿Qué es JSON?</h2>
+  <h2>1. ¿Qué es JSON?</h2>
   <p><strong>JSON</strong> significa <em>JavaScript Object Notation</em> (notación de objetos de JavaScript). Es un formato de texto ligero para representar e intercambiar datos estructurados entre aplicaciones. Aunque su nombre menciona JavaScript, JSON puede utilizarse con muchos lenguajes, como Python, Java, PHP y C#.</p>
   <p>Se usa frecuentemente en API web: un servidor devuelve datos en JSON y una aplicación los interpreta para mostrarlos o procesarlos. Un archivo JSON suele tener la extensión <code>.json</code> y el tipo de contenido <code>application/json</code>.</p>
   <div class="note"><strong>Idea clave:</strong> JSON es un formato de datos, no un lenguaje de programación. No contiene instrucciones, funciones ni comentarios.</div>
@@ -119,7 +103,7 @@ a { overflow-wrap: anywhere; }
 </section>
 
 <section id="sintaxis">
-  <h2>3. Sintaxis y reglas principales</h2>
+  <h2>2. Sintaxis y reglas principales</h2>
   <ul>
     <li>Un <strong>objeto</strong> se delimita con llaves <code>{ }</code> y contiene pares <code>"clave": valor</code>.</li>
     <li>Un <strong>arreglo</strong> se delimita con corchetes <code>[ ]</code> y contiene una lista de valores.</li>
@@ -160,7 +144,7 @@ console.log(salida);</code></pre>
 </section>
 
 <section id="basicos">
-  <h2>4. Cinco ejemplos básicos </h2>
+  <h2>3. Cinco ejemplos básicos </h2>
   <div class="grid">
     <article class="card"><span class="tag good">Ejemplo 1</span>
 	<pre><code>{
@@ -205,7 +189,7 @@ console.log(salida);</code></pre>
 </section>
 
 <section id="anidados">
-  <h2>5. Cinco ejemplos con objetos anidados</h2>
+  <h2>4. Cinco ejemplos con objetos anidados</h2>
   <p>Un objeto anidado es un objeto dentro de otro objeto. Los arreglos también pueden contener objetos. Esta estructura permite representar información relacionada.</p>
   <h3>Ejemplo 1. Estudiante y dirección</h3>
   <pre><code>{
@@ -272,7 +256,7 @@ console.log(salida);</code></pre>
 </section>
 
 <section id="errores">
-  <h2>6. Cinco ejemplos con errores: encuentra el problema</h2>
+  <h2>5. Cinco ejemplos con errores: encuentra el problema</h2>
   <p>Antes de abrir la respuesta, intenta identificar por qué cada fragmento no es JSON válido. El botón revela una explicación.</p>
   <div class="question">
     <h3>Error 1. Comillas simples</h3><pre><code>{ 'nombre': 'Laura' }</code></pre>
@@ -308,7 +292,7 @@ console.log(salida);</code></pre>
 </section>
 
 <section id="web">
-  <h2>7. Sitios web útiles</h2>
+  <h2>6. Sitios web útiles</h2>
   <h3>Validar JSON</h3>
   <div class="grid">
     <article class="card">
@@ -352,7 +336,7 @@ console.log(salida);</code></pre>
 </section>
 
 <section id="autoevaluacion">
-  <h2>8. Autoevaluación</h2>
+  <h2>7. Autoevaluación</h2>
   <p>Selecciona una respuesta en cada pregunta y pulsa <strong>Calificar</strong> para ver el resultado y la explicación.</p>
   <form id="quiz">
     <div class="question">
@@ -397,7 +381,7 @@ console.log(salida);</code></pre>
   </form>
 </section>
 <section id="objetivos">
-  <h2>9. Retos</h2>
+  <h2>8. Retos</h2>
   <p><b>Ejercicio 1. Registro de un estudiante</b><br/>
 Desarrolle un objeto JSON que permita representar 
 la información de un estudiante de una institución educativa. 
