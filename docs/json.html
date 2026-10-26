@@ -85,9 +85,9 @@ a { overflow-wrap: anywhere; }
 <body>
 <header>
   <div class="hero">
-    <p><strong>NOTAS DE CLASE</strong></p>
-    <h1>JSON: estructura, sintaxis y uso en la web</h1>
-    <p>Una guía práctica para leer, escribir, validar y consumir datos JSON con ejemplos y ejercicios.</p>
+    <p><strong>NOTAS DE CLASE - JSON</strong></p>
+    <h1>JSON: JavaScript Object Notation</h1>
+    
   </div>
 </header>
 
@@ -140,7 +140,7 @@ console.log(persona.nombre); // Ana
 // Objeto de JavaScript → texto JSON
 const salida = JSON.stringify(persona);
 console.log(salida);</code></pre>
-  <p class="small"><a href="https://www.w3schools.com/js/js_json_stringify.asp">ver ejemplo de ejecución aquí</a></p>
+  <p class="small"><a target="_blank" href="https://www.w3schools.com/js/js_json_parse.asp">Ver ejemplo aquí</a></p>
 </section>
 
 <section id="basicos">
@@ -259,29 +259,29 @@ console.log(salida);</code></pre>
   <h2>5. Cinco ejemplos con errores: encuentra el problema</h2>
   <p>Antes de abrir la respuesta, intenta identificar por qué cada fragmento no es JSON válido. El botón revela una explicación.</p>
   <div class="question">
-    <h3>Error 1. Comillas simples</h3><pre><code>{ 'nombre': 'Laura' }</code></pre>
+    <h3>Error 1.</h3><pre><code>{ 'nombre': 'Laura' }</code></pre>
     <button class="secondary" onclick="toggleAnswer('e1', this)">Mostrar respuesta</button>
     <p id="e1" hidden><strong>Error:</strong> las claves y cadenas deben usar comillas dobles. Correcto: <code>{"nombre": "Laura"}</code>.</p>
   </div>
   <div class="question">
-    <h3>Error 2. Coma final</h3><pre><code>{
+    <h3>Error 2.</h3><pre><code>{
   "edad": 20,
 }</code></pre>
     <button class="secondary" onclick="toggleAnswer('e2', this)">Mostrar respuesta</button>
     <p id="e2" hidden><strong>Error:</strong> no se permite una coma después de la última propiedad. Elimina la coma tras <code>20</code>.</p>
   </div>
   <div class="question">
-    <h3>Error 3. Falta dos puntos</h3><pre><code>{ "ciudad" "Bogotá" }</code></pre>
+    <h3>Error 3.</h3><pre><code>{ "ciudad" "Bogotá" }</code></pre>
     <button class="secondary" onclick="toggleAnswer('e3', this)">Mostrar respuesta</button>
     <p id="e3" hidden><strong>Error:</strong> falta <code>:</code> entre la clave y el valor. Correcto: <code>{"ciudad": "Bogotá"}</code>.</p>
   </div>
   <div class="question">
-    <h3>Error 4. Valor no admitido</h3><pre><code>{ "telefono": undefined }</code></pre>
+    <h3>Error 4.</h3><pre><code>{ "telefono": undefined }</code></pre>
     <button class="secondary" onclick="toggleAnswer('e4', this)">Mostrar respuesta</button>
     <p id="e4" hidden><strong>Error:</strong> <code>undefined</code> no es un valor JSON válido. Usa, por ejemplo, <code>null</code> si representa ausencia de dato.</p>
   </div>
   <div class="question">
-    <h3>Error 5. Comentario no permitido</h3><pre><code>{
+    <h3>Error 5.</h3><pre><code>{
   // datos del usuario
   "nombre": "Pablo"
 }</code></pre>
@@ -391,6 +391,13 @@ lista con tres asignaturas que esté estudiando. Utilice los tipos de datos adec
 para representar cada atributo.<hr/>
 <b>Ejercicio 2. Registro de un pedido en una tienda</b><br/>
 Construya un objeto JSON que represente un pedido realizado por un cliente en una tienda de tecnología. La información debe incluir el número del pedido, el nombre del cliente, la fecha en que se realizó, los productos comprados, el precio de cada producto, la cantidad solicitada, el valor total del pedido y si el pago ha sido confirmado. El pedido debe contener al menos dos productos y utilizar estructuras de datos apropiadas para organizar la información.</p>
+<hr/><b>Ejercicio 3. Registro de una cita médica</b><br/>
+<p>Desarrolle un objeto JSON que permita representar la información de una cita médica en una institución de salud. El objeto debe incluir el número de la cita, el nombre completo del paciente, su edad, la especialidad médica, el nombre del profesional de salud, la fecha y hora de la cita, si la cita ha sido confirmada y una lista con los síntomas que presenta el paciente. Utilice los tipos de datos adecuados para representar cada atributo.</p>
+<hr/><b>Ejercicio 4. Registro de un producto en un inventario</b><br/>
+<p>Construya un objeto JSON que represente un producto almacenado en el inventario de una empresa comercial. La información debe incluir el código del producto, su nombre, la categoría a la que pertenece, el precio unitario, la cantidad disponible, si el producto está disponible para la venta y los datos del proveedor, incluyendo su nombre y número de contacto. Además, incluya una lista con al menos dos características del producto. Utilice estructuras de datos apropiadas para organizar la información.</p>
+<hr/><b>Ejercicio 5. Registro de una reserva hotelera</b><br/>
+<p>Desarrolle un objeto JSON que represente una reserva realizada por un cliente en un hotel. El objeto debe incluir el número de la reserva, el nombre completo del cliente, el tipo de habitación reservada, la fecha de entrada, la fecha de salida, el número de huéspedes, el costo por noche, el valor total de la reserva y si el pago ha sido realizado. Además, incluya un objeto anidado con la información de contacto del cliente, que contenga su correo electrónico y número de teléfono. Utilice los tipos de datos adecuados para representar cada atributo.</p>
+
 </section>
 </main>
 <footer>
